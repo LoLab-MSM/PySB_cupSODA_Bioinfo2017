@@ -51,8 +51,8 @@ def likelihood_one():
         plt.plot(solver.tspan, out)
         plt.xlabel('Time (min)', fontsize=16)
         plt.ylabel('cdc-U:cyclin-P (count)', fontsize=16)
-        x1 = np.where(tspan==times[0])
-        x2 = np.where(tspan == times[0])
+        x1 = np.where(tspan == times[0])
+        x2 = np.where(tspan == times[1])
         x = [times[0],times[1]]
         yy = [out[x1],out[x2]]
         plt.axvline(x[0],linestyle='dashed',color='black')
@@ -152,7 +152,8 @@ def main():
                gpu=0,
                max_steps=mxstep,
                load_conc_data=False,
-               memory_usage=mem)
+               memory_usage=mem,
+               vol = 10e-20)
     os.system('rm -r %s' % os.path.join('.', 'CUPSODA_%s') % model.name)
     plt.plot(solver.tspan,solver.yobs[:][observable].T)
     plt.savefig('test.png')
