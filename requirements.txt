@@ -1,4 +1,4 @@
-setuptools=18.0.1
+setuptools==18.0.1
 matplotlib
 numpy
 pandas
