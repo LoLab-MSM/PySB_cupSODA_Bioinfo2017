@@ -87,7 +87,7 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
 
 # Supplemental figure
 create_boxplot_and_heatplot(tyson,
-                            os.path.join('Data', 'sens_tyson_matrix.csv'),
+                            os.path.join('Data', 'here_here_image_matrix.csv'),
                             'Percent change in period',
                             'tyson_sensitivity_boxplot.png')
 

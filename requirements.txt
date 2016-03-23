@@ -3,5 +3,4 @@ matplotlib
 numpy
 pandas
 git+git://github.com/LoLab-VU/earm.git@jpino
-git+git://github.com/LoLab-VU/pysb.git
-git+git://github.com/LoLab-VU/pysb-cupsoda.git
+git+git://github.com/LoLab-VU/pysb.git@cupsoda

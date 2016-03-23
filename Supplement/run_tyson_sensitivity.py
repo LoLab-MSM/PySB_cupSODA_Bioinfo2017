@@ -6,8 +6,7 @@ import matplotlib.pyplot as plt
 import pysb
 from pysb.bng import generate_equations
 from pysb.integrate import odesolve
-from pysb_cupsoda import set_cupsoda_path, CupsodaSolver
-
+from pysb.cupsoda import set_cupsoda_path, CupsodaSolver
 
 from pysb.examples.tyson_oscillator import model
 tspan = np.linspace(0, 200, 1001)
@@ -46,28 +45,6 @@ def likelihood_one():
         if y[n] > 0 > prev:
             times.append(timestep[n])
         prev = y[n]
-    if plot:
-        plt.figure()
-        plt.plot(solver.tspan, out)
-        plt.xlabel('Time (min)', fontsize=16)
-        plt.ylabel('cdc-U:cyclin-P (count)', fontsize=16)
-        x1 = np.where(tspan == times[0])
-        x2 = np.where(tspan == times[1])
-        x = [times[0],times[1]]
-        yy = [out[x1],out[x2]]
-        plt.axvline(x[0],linestyle='dashed',color='black')
-        plt.axvline(x[1], linestyle='dashed',color='black')
-        arrow_x_0 = x[1]-x[0]
-        y_distance = yy[1]
-        plt.arrow(arrow_x_0,y_distance,  x[1]-arrow_x_0-5, 0, head_width=55, head_length=3,color='k')
-        plt.arrow(arrow_x_0,y_distance, x[0]-arrow_x_0+5, 0, head_width=55, head_length=3,color='k')
-        plt.xlim(0, 60)
-        plt.ylim(0,1400)
-        plt.savefig(observable + '.png')
-        plt.savefig(observable + '.eps')
-        plt.close()
-    plt.plot(timestep, y)
-    plt.savefig('slope.png')
     times = np.array(times)
     period = np.average(times) / len(times) * 2
 

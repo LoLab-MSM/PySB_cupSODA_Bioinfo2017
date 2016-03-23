@@ -17,7 +17,7 @@ cupsoda_data = np.genfromtxt(datafile, delimiter=',', dtype=None, names=True)
 datafile = os.path.join('Supplement', 'Data', 'scipy_timings.csv')
 scipy_data = np.genfromtxt(datafile, delimiter=',', dtype=None, names=True)
 
-fig = plt.figure(figsize=(12, 6))
+fig = plt.figure(figsize=(12,7))
 numbers = [1, 3, 5]
 indies = [(0, 0), (1, 0), (2, 0)]
 for count, model in enumerate(['tyson', 'ras', 'earm']):
@@ -56,7 +56,7 @@ for count, model in enumerate(['tyson', 'ras', 'earm']):
         ax3.plot(xdata, ydata, '-v', ms=12, lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
     plt.xscale('log')
     plt.yscale('log')
-x_limit = [0,10000]
+x_limit = [0,11000]
 ax1.set_xlim(x_limit)
 ax1.set_ylim(0, 100)
 ax2.set_xlim(x_limit)
@@ -70,32 +70,36 @@ plt.setp(ax2.get_xticklabels(), visible=False)
 ax1.set_yticks(ax1.get_yticks()[3:])
 ax2.set_yticks(ax2.get_yticks()[3:])
 
-ax1.yaxis.set_tick_params(labelsize=14)
-ax2.yaxis.set_tick_params(labelsize=14)
-ax3.yaxis.set_tick_params(labelsize=14)
-ax1.legend(fontsize=14, bbox_to_anchor=(.8, 1.15), fancybox=True)
-ax2.set_ylabel('Time (s)', fontsize=14)
-ax3.set_xlabel("Number of simulations", fontsize=14)
-distance = (-60, 10)
-ax1.annotate('A', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=(-60, 18), textcoords='offset points',
-             ha='left', va='top')
-ax2.annotate('B', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=distance, textcoords='offset points',
-             ha='left', va='top')
-ax3.annotate('C', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=(-60, 10), textcoords='offset points',
-             ha='left', va='top')
-ax1.annotate('Tyson', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=(5, -5), textcoords='offset points',
-             ha='left', va='top')
-ax2.annotate('Ras/cAMP/PKA', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=(5, -5), textcoords='offset points',
-             ha='left', va='top')
-ax3.annotate('EARM', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=(5, -5), textcoords='offset points',
-             ha='left', va='top')
+f_size1 = 18
+f_size2 = 24
 
+ax1.yaxis.set_tick_params(labelsize=f_size1)
+ax2.yaxis.set_tick_params(labelsize=f_size1)
+ax3.yaxis.set_tick_params(labelsize=f_size1)
+ax3.xaxis.set_tick_params(labelsize=f_size1)
+ax1.legend(fontsize=14, bbox_to_anchor=(.9, 1.19), fancybox=True)
+
+ax2.set_ylabel('Time (s)',fontsize=f_size1)
+ax3.set_xlabel("Number of simulations",fontsize=f_size1)
+distance = (-60,10)
+ax1.annotate('A', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+                xytext=(-70,25), textcoords='offset points',
+                ha='left', va='top')
+ax2.annotate('B', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+                xytext=(-70,10), textcoords='offset points',
+                ha='left', va='top')
+ax3.annotate('C', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+                xytext=(-70,10), textcoords='offset points',
+                ha='left', va='top')
+ax1.annotate('Cell cycle', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+             xytext=(5, -5), textcoords='offset points',
+             ha='left', va='top')
+ax2.annotate('Ras/cAMP/PKA', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+             xytext=(5, -5), textcoords='offset points',
+             ha='left', va='top')
+ax3.annotate('EARM', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+             xytext=(5, -5), textcoords='offset points',
+             ha='left', va='top')
 
 
 proteins_of_interest = []
@@ -122,13 +126,21 @@ for j in range(0, len(image), len_vals):
     all_runs_1.append(per_protein1)
 
 ax4.boxplot(all_runs_1, vert=False, labels=None, showfliers=False)
-ax4.set_xlabel('Percent change in time-to-death', fontsize=14)
+ax4.set_xlabel('Percent change in time-to-death',fontsize=f_size1)
 xtickNames = plt.setp(ax4, yticklabels=proteins_of_interest)
 ax4.yaxis.tick_right()
+plt.setp(xtickNames,fontsize=30)
+plt.tick_params(axis='y', which='major', labelsize=16)
+plt.tick_params(axis='x', which='major', labelsize=18)
 
-ax4.annotate('D', xy=(0, 1), xycoords='axes fraction', fontsize=20,
-             xytext=(-15, 18), textcoords='offset points',
-             ha='left', va='top')
+
+ticks = [-6,-4, -2, 0, 2, 4, 6, 8]
+ax4.xaxis.set_ticks(ticks)
+ax4.set_xticklabels(ticks)
+ax4.annotate('D', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
+                xytext=(0, 25), textcoords='offset points',
+                ha='left', va='top')
 plt.tight_layout()
-fig.subplots_adjust(hspace=.02, wspace=.1)
+fig.subplots_adjust(hspace=.1,wspace=.01,left=.084,top=.93,bottom=0.1)
 plt.savefig(os.path.join(figs, 'all_timing_and_boxplot.png'), bbox_tight='True')
+plt.savefig(os.path.join(figs, 'all_timing_and_boxplot.eps'), bbox_tight='True')

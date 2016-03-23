@@ -78,7 +78,7 @@ ax3.annotate('C', xy=(0, 1), xycoords='axes fraction', fontsize=20,
              xytext=(-60, 10), textcoords='offset points',
              ha='left', va='top')
 
-ax1.annotate('Tyson', xy=(0, 1), xycoords='axes fraction', fontsize=20,
+ax1.annotate('Cell Cycle', xy=(0, 1), xycoords='axes fraction', fontsize=20,
              xytext=(5, -5), textcoords='offset points',
              ha='left', va='top')
 ax2.annotate('Ras/cAMP/PKA', xy=(0, 1), xycoords='axes fraction', fontsize=20,
@@ -98,4 +98,4 @@ ax3.set_ylim(2, 200)
 
 plt.tight_layout()
 plt.subplots_adjust(hspace=0.0)
-plt.savefig(os.path.join(figs, 'compare_memory.png'), bbox_tight='True')
+plt.savefig(os.path.join(figs, 'compare_memory.eps'), bbox_tight='True')
