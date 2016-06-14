@@ -11,10 +11,10 @@ figs = os.path.join('.', 'FIGS')
 if not os.path.exists(figs):
     os.makedirs(figs)
 
-datafile = os.path.join('Supplement', 'Data', 'gpu_timings.csv')
+datafile = os.path.join('RawData', 'gpu_timings.csv')
 cupsoda_data = np.genfromtxt(datafile, delimiter=',', dtype=None, names=True)
 
-datafile = os.path.join('Supplement', 'Data', 'scipy_timings.csv')
+datafile = os.path.join('RawData', 'scipy_timings.csv')
 scipy_data = np.genfromtxt(datafile, delimiter=',', dtype=None, names=True)
 
 fig = plt.figure(figsize=(12,7))
@@ -107,7 +107,7 @@ for i in earm.initial_conditions:
     proteins_of_interest.append(i[1].name)
 vals = np.linspace(.8, 1.2, 11)
 median = int(np.median(range(0, len(vals))))
-image = np.loadtxt(os.path.join('Supplement', 'Data', 'earm_parameter_set_1.csv'))
+image = np.loadtxt(os.path.join('RawData', 'earm_parameter_set_1.csv'))
 vmax = max(np.abs(image.min()), image.max())
 vmin = -1 * vmax
 

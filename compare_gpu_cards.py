@@ -1,19 +1,18 @@
-import os
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
+import os
 
 """
-Creates supplemental figure X
-Comparison of different memory options
-
+Creates supplmental figure X.
+Timing of various GPUs.
 """
 
 figs = os.path.join('.', 'FIGS')
 if not os.path.exists(figs):
     os.makedirs(figs)
 
-datafile = os.path.join('Data', 'gpu_memory.csv')
-cupsoda_data = np.genfromtxt(datafile, delimiter=',', dtype=None, names=True)
+gpu_timings = os.path.join('RawData', 'gpu_timings.csv')
+cupsoda_data = np.genfromtxt(gpu_timings, delimiter=',', dtype=None, names=True)
 
 plot_index = [(0, 0), (1, 0), (2, 0)]
 plt.figure()
@@ -21,24 +20,25 @@ for count, model in enumerate(['tyson', 'ras', 'earm']):
     if model == 'tyson':
         ax1 = plt.subplot2grid((3, 1), plot_index[count])
     if model == 'ras':
-        ax2 = plt.subplot2grid((3, 1), plot_index[count], )
+        ax2 = plt.subplot2grid((3, 1), plot_index[count], sharex=ax1)
     if model == 'earm':
-        ax3 = plt.subplot2grid((3, 1), plot_index[count], )
+        ax3 = plt.subplot2grid((3, 1), plot_index[count], sharex=ax1)
     n_simulations = []
     for x in [d['nsims'] for d in cupsoda_data if d['model'] == model]:
         if x not in n_simulations:
             n_simulations.append(x)
 
-    fmt = ['^-', 's-', '*-']
-    colors = ['c', 'magenta', 'green', ]
-    labels = ['global', 'global+shared', 'global+shared+constant']
-    mem = [0, 1, 2]
-    for i in range(len(mem)):
+    fmt = ['>-', '8-', '.-', '*-']
+    cards = ['K20c-puma', 'gtx980-mule', 'gtx760-lolab', 'gtx980-diablo']
+    colors = ['purple', 'orange', 'darkblue', 'green', ]
+    labels = ['K20C', 'gtx970', 'gtx760', 'gtx980-TI']
+
+    for i in range(len(cards)):
         times = []
         num_sims = []
         for x in n_simulations:
             data = cupsoda_data[cupsoda_data['model'] == model]
-            data = data[data['mem'] == mem[i]]
+            data = data[data['card'] == cards[i]]
             data = data[data['nsims'] == x]
             if len(data) == 0:
                 continue
@@ -63,8 +63,7 @@ plt.setp(ax2.get_xticklabels(), visible=False)
 ax1.yaxis.set_tick_params(labelsize=14)
 ax2.yaxis.set_tick_params(labelsize=14)
 ax3.yaxis.set_tick_params(labelsize=14)
-
-ax1.legend(fontsize=14, bbox_to_anchor=(.75, 1.0), fancybox=True)
+ax1.legend(fontsize=14, bbox_to_anchor=(.6, 1.1), fancybox=True)
 ax2.set_ylabel('Time (s)', fontsize=14)
 ax3.set_xlabel("Number of simulations", fontsize=14)
 
@@ -87,15 +86,14 @@ ax2.annotate('Ras/cAMP/PKA', xy=(0, 1), xycoords='axes fraction', fontsize=20,
 ax3.annotate('EARM', xy=(0, 1), xycoords='axes fraction', fontsize=20,
              xytext=(5, -5), textcoords='offset points',
              ha='left', va='top')
-
-x_lim = [-10, 10000]
+y_lim = [1, 500]
+x_lim = [10, 10000]
 ax1.set_xlim(x_lim)
-ax1.set_ylim(.1, 200)
+ax1.set_ylim(.1, 500)
 ax2.set_xlim(x_lim)
-ax2.set_ylim(2, 200)
+ax2.set_ylim(y_lim)
 ax3.set_xlim(x_lim)
-ax3.set_ylim(2, 200)
-
+ax3.set_ylim(y_lim)
 plt.tight_layout()
 plt.subplots_adjust(hspace=0.0)
-plt.savefig(os.path.join(figs, 'compare_memory.eps'), bbox_tight='True')
+plt.savefig(os.path.join(figs, 'gpu_comparison.eps'), bbox_tight='True')

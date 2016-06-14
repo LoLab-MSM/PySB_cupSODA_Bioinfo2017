@@ -1,12 +1,11 @@
-import pysb.integrate as integrate
-import pysb
-import numpy as np
-import sys
-import scipy.interpolate
 import matplotlib.pyplot as plt
-from pysb.util import update_param_vals, load_params
 import matplotlib.ticker as mtick
+import numpy as np
+import scipy.interpolate
 
+import pysb
+import pysb.integrate as integrate
+from pysb.util import update_param_vals, load_params
 
 ATOL = 1e-6
 RTOL = 1e-6
@@ -93,15 +92,11 @@ def observable_cell_cycle():
     plt.close()
 
 
-from Supplement.ras_amp_pka import model
 tspan = np.linspace(0, 1500, 100)
 observable = 'obs_cAMP'
 savename = 'ras'
 observable_ras()
 
-
-
-from pysb.examples.tyson_oscillator import model
 tspan = np.linspace(0, 300, 1000)
 observable = 'Y3'
 savename = 'tyson'

@@ -1,6 +1,7 @@
 setuptools==18.0.1
 matplotlib
 numpy
+scipy
 pandas
 git+git://github.com/LoLab-VU/earm.git@jpino
 git+git://github.com/LoLab-VU/pysb.git@cupsoda

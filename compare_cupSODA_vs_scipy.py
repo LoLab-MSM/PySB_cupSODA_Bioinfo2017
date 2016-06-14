@@ -1,16 +1,17 @@
-import time
-import pysb.integrate as integrate
-import pysb
-import numpy as np
 import os
-from pysb_cupsoda import set_cupsoda_path, CupsodaSolver
+import time
+
+import numpy as np
+
+import pysb
+import pysb.integrate as integrate
 from pysb.bng import generate_equations
-import sys
+from pysb_cupsoda import set_cupsoda_path, CupsodaSolver
 
 #name = sys.argv[1]
-name = 'tyson'
+name = 'earm'
 if name == 'ras':
-    from Supplement.ras_amp_pka import model
+    from models.ras_amp_pka import model
     tspan = np.linspace(0, 1500, 100)
     simulations = [10, 100, 1000, 10000, 100000]
     vol = 1e-19
@@ -22,7 +23,7 @@ elif name == 'tyson':
     vol = 1e-19
 
 elif name == 'earm':
-    from earm.lopez_embedded import model
+    from models.earm_lopez_embedded_flat import  model
     tspan = np.linspace(0, 20000, 100)
     simulations = [10, 100, 1000, 10000]
     vol = 1.661e-20
@@ -130,8 +131,9 @@ def main(number_particles):
 
 
 
+main(10)
 
-main(10000)
+#main(10000)
 #for j in simulations:
 #    main(j)
 print(output)
