@@ -21,8 +21,8 @@ colors = 'seismic'
 
 vals = np.linspace(.8, 1.2, 11)
 median = int(np.median(range(0, len(vals))))
-sensitivity_matrix_1 = np.loadtxt(os.path.join('RawData', 'earm_parameter_set_1.csv'))
-sensitivity_matrix_2 = np.loadtxt(os.path.join('RawData', 'earm_parameter_set_2.csv'))
+sensitivity_matrix_1 = np.loadtxt(os.path.join('RawData', 'parameters_1_gpu_new_image_matrix.csv'))
+sensitivity_matrix_2 = np.loadtxt(os.path.join('RawData', 'parameters_2_gpu_new_image_matrix.csv'))
 all_runs_1 = []
 all_runs_2 = []
 length_matrix = len(sensitivity_matrix_1)

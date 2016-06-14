@@ -7,8 +7,8 @@ import pysb
 import pysb.integrate as integrate
 from pysb.util import update_param_vals, load_params
 
-ATOL = 1e-6
-RTOL = 1e-6
+ATOL = 1e-12
+RTOL = 1e-12
 mxstep = 20000
 
 def observable_earm():
@@ -24,7 +24,8 @@ def observable_earm():
         t10 = 0
         t90 = 0
     td = (t10 + t90) / 2
-    plt.plot(solver.tspan / 3600, ysim_momp_norm, 'b-', linewidth=2)
+    plt.figure()
+    plt.plot(tspan / 3600, ysim_momp_norm, 'b-', linewidth=2)
     plt.xlabel("Time (hr)", fontsize=16)
     plt.ylabel('cPARP / PARP_0', fontsize=16)
     plt.plot(td/3600,.5,'ok',ms=15,mfc='none',mew=3)
@@ -41,11 +42,13 @@ def observable_ras():
                                    integrator='lsoda', mxstep=mxstep)
     solver.run()
     out = solver.yobs[observable]
+    print(out)
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.plot(solver.tspan, solver.yobs[observable], linewidth=2, )
+    ax.plot(tspan, solver.yobs[observable], linewidth=2, )
     max_y = np.where(out == out.max())
-    ax.plot(solver.tspan[max_y], out.max(), 'o', color='red', markersize=14,mew=3,mfc='none', alpha=.75)
+    print(tspan[max_y],out.max())
+    ax.plot(tspan[max_y], out.max(), 'o', color='red', markersize=14,mew=3,mfc='none', alpha=.75)
     plt.axhline(out.max(), linestyle='dashed', color='black')
     plt.ylabel('cAMP (count) ',fontsize=16)
     plt.xlabel('Time (s)',fontsize=16)
@@ -62,7 +65,7 @@ def observable_cell_cycle():
     solver.run()
     out = solver.yobs[observable]
 
-    timestep = solver.tspan[:-1]
+    timestep = tspan[:-1]
     y = out[:-1] - out[1:]
     times = []
     prev = y[0]
@@ -72,7 +75,7 @@ def observable_cell_cycle():
         prev = y[n]
 
     plt.figure()
-    plt.plot(solver.tspan, out)
+    plt.plot(tspan, out)
     plt.xlabel('Time (min)', fontsize=16)
     plt.ylabel('cdc-U:cyclin-P (count)', fontsize=16)
     x1 = np.where(tspan == times[0])
@@ -92,11 +95,13 @@ def observable_cell_cycle():
     plt.close()
 
 
+from models.ras_amp_pka import model
 tspan = np.linspace(0, 1500, 100)
 observable = 'obs_cAMP'
 savename = 'ras'
 observable_ras()
 
+from pysb.examples.tyson_oscillator import model
 tspan = np.linspace(0, 300, 1000)
 observable = 'Y3'
 savename = 'tyson'

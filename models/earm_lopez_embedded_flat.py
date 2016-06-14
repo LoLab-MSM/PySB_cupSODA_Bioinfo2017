@@ -1,6 +1,6 @@
 # exported from PySB model 'earm.lopez_embedded'
 
-from pysb import Model, Monomer, Parameter, Expression, Compartment, Rule, Observable, Initial, Annotation, ANY, WILD,MatchOnce
+from pysb import Model, Monomer, Parameter, Expression, Compartment, Rule, Observable, Initial, Annotation, ANY, WILD, MatchOnce
 
 Model()
 
@@ -95,10 +95,9 @@ Parameter('Bax_0', 80000.0)
 Parameter('Bak_0', 20000.0)
 Parameter('equilibrate_BidT_to_BidM_kf', 0.1)
 Parameter('equilibrate_BidT_to_BidM_kr', 0.001)
-Parameter('equilibrate_BaxC_to_BaxM_kf', 0.01)
-Parameter('equilibrate_BaxC_to_BaxM_kr', 0.01)
-Parameter('equilibrate_BclxLC_to_BclxLM_kf', 0.01)
-Parameter('equilibrate_BclxLC_to_BclxLM_kr', 0.01)
+Parameter('bind_BidM_BaxC_to_BidMBaxC_kf', 1e-07)
+Parameter('bind_BidM_BaxC_to_BidMBaxC_kr', 0.001)
+Parameter('catalyze_BidMBaxC_to_BidM_BaxM_kc', 1.0)
 Parameter('bind_BidM_BaxM_to_BidMBaxM_kf', 1e-07)
 Parameter('bind_BidM_BaxM_to_BidMBaxM_kr', 0.001)
 Parameter('catalyze_BidMBaxM_to_BidM_BaxA_kc', 1.0)
@@ -188,8 +187,8 @@ Rule('catalyze_C3AC6pro_to_C3A_C6A', C3(bf=1, state='A') % C6(bf=1, state='pro')
 Rule('bind_C6A_C8pro_to_C6AC8pro', C6(bf=None, state='A') + C8(bf=None, state='pro') <> C6(bf=1, state='A') % C8(bf=1, state='pro'), bind_C6A_C8pro_to_C6AC8pro_kf, bind_C6A_C8pro_to_C6AC8pro_kr)
 Rule('catalyze_C6AC8pro_to_C6A_C8A', C6(bf=1, state='A') % C8(bf=1, state='pro') >> C6(bf=None, state='A') + C8(bf=None, state='A'), catalyze_C6AC8pro_to_C6A_C8A_kc)
 Rule('equilibrate_BidT_to_BidM', Bid(bf=None, state='T') <> Bid(bf=None, state='M'), equilibrate_BidT_to_BidM_kf, equilibrate_BidT_to_BidM_kr)
-Rule('equilibrate_BaxC_to_BaxM', Bax(bf=None, s1=None, s2=None, state='C') <> Bax(bf=None, s1=None, s2=None, state='M'), equilibrate_BaxC_to_BaxM_kf, equilibrate_BaxC_to_BaxM_kr)
-Rule('equilibrate_BclxLC_to_BclxLM', BclxL(bf=None, state='C') <> BclxL(bf=None, state='M'), equilibrate_BclxLC_to_BclxLM_kf, equilibrate_BclxLC_to_BclxLM_kr)
+Rule('bind_BidM_BaxC_to_BidMBaxC', Bid(bf=None, state='M') + Bax(bf=None, state='C') <> Bid(bf=1, state='M') % Bax(bf=1, state='C'), bind_BidM_BaxC_to_BidMBaxC_kf, bind_BidM_BaxC_to_BidMBaxC_kr)
+Rule('catalyze_BidMBaxC_to_BidM_BaxM', Bid(bf=1, state='M') % Bax(bf=1, state='C') >> Bid(bf=None, state='M') + Bax(bf=None, state='M'), catalyze_BidMBaxC_to_BidM_BaxM_kc)
 Rule('bind_BidM_BaxM_to_BidMBaxM', Bid(bf=None, state='M') + Bax(bf=None, state='M') <> Bid(bf=1, state='M') % Bax(bf=1, state='M'), bind_BidM_BaxM_to_BidMBaxM_kf, bind_BidM_BaxM_to_BidMBaxM_kr)
 Rule('catalyze_BidMBaxM_to_BidM_BaxA', Bid(bf=1, state='M') % Bax(bf=1, state='M') >> Bid(bf=None, state='M') + Bax(bf=None, state='A'), catalyze_BidMBaxM_to_BidM_BaxA_kc)
 Rule('bind_BidM_BakM_to_BidMBakM', Bid(bf=None, state='M') + Bak(bf=None, state='M') <> Bid(bf=1, state='M') % Bak(bf=1, state='M'), bind_BidM_BakM_to_BidMBakM_kf, bind_BidM_BakM_to_BidMBakM_kr)

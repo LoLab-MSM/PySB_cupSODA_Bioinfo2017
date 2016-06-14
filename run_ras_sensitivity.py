@@ -1,32 +1,16 @@
 import time
 import numpy as np
+from models.ras_amp_pka import model
 from pysb.integrate import Solver
 from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
 from pysb.tools.sensitivity_analysis import InitialConcentrationSensitivityAnalysis
-from pysb.examples.tyson_oscillator import model
-import matplotlib.pyplot as plt
+
+tspan = np.linspace(0, 1500, 100)
+observable = 'obs_cAMP'
 
 
-tspan = np.linspace(0, 200, 1001)
-vol = 1e-19
-observable = 'Y3'
-
-
-def obj_func_cell_cycle(out):
-    timestep = tspan[:-1]
-    y = out[:-1] - out[1:]
-    freq = 0
-    local_times = []
-    prev = y[0]
-    for n in range(1, len(y)):
-        if y[n] > 0 > prev:
-            local_times.append(timestep[n])
-            freq += 1
-        prev = y[n]
-
-    local_times = np.array(local_times)
-    local_freq = np.average(local_times)/len(local_times)*2
-    return local_freq
+def obj_func_ras(out):
+    return out.max()
 
 def cupsoda_solver(matrix):
     size_of_matrix = len(matrix)
@@ -36,21 +20,13 @@ def cupsoda_solver(matrix):
                gpu=0,
                max_steps=20000,
                obs_species_only=True,
-               memory_usage='sharedconstant',
+               memory_usage='shared',
                vol=10e-19)
     end_time = time.time()
     obs = solver.concs_observables(squeeze=False)
-    obs = np.array(obs)
-    plt.plot(solver.tspan, obs[:][observable].T)
-    plt.savefig('test2.png')
-    print(np.shape(obs))
     print("Time taken {0}".format(end_time-start_time))
     print('out==', obs[0][0], obs[0][-1], '==out')
     sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
-    counter = 0
-    for i in range(size_of_matrix):
-        sensitivity_matrix[:, i] = obs[observable][i]
-    print(sensitivity_matrix)
     return sensitivity_matrix
 
 
@@ -60,6 +36,7 @@ def run_solver(matrix):
     sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
     start_time = time.time()
     for k in range(size_of_matrix):
+        print(k,size_of_matrix)
         solver.run(y0=matrix[k, :])
         sensitivity_matrix[:, k] = solver.yobs[observable]
     end_time = time.time()
@@ -69,16 +46,16 @@ def run_solver(matrix):
 
 def run():
 
-    savename = 'tyson_sensitivity'
+    savename = 'cAMP'
     vals = np.linspace(.8, 1.2, 21)
     set_cupsoda_path("/home/pinojc/git/cupSODA")
     directory = 'OUT'
     sens = InitialConcentrationSensitivityAnalysis(model, tspan,
                                                    values_to_sample=vals,
                                                    observable=observable,
-                                                   objective_function=obj_func_cell_cycle)
+                                                   objective_function=obj_func_ras)
 
-    sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
+    sens.run(run_solver=run_solver, save_name=savename, output_directory=directory)
 
 if __name__ == '__main__':
     run()

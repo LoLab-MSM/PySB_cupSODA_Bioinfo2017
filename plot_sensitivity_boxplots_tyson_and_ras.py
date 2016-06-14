@@ -89,12 +89,11 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
 
 # Supplemental figure
 create_boxplot_and_heatplot(tyson,
-                            os.path.join('RawData', 'here_here_image_matrix.csv'),
+                            os.path.join('RawData', 'sens_tyson_matrix.csv'),
                             'Percent change in period',
                             'tyson_sensitivity_boxplot.png')
-
 # Supplemental figure
 create_boxplot_and_heatplot(ras,
-                            os.path.join('RawData', 'sens_ras_matrix.csv'),
+                            os.path.join('OUT', 'cAMP_image_matrix.csv'),
                             'Percent change in cAMP count',
                             'ras_sensitivity_boxplot.png')
