@@ -4,13 +4,10 @@ from pysb.integrate import Solver
 from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
 from pysb.tools.sensitivity_analysis import InitialConcentrationSensitivityAnalysis
 from pysb.examples.tyson_oscillator import model
-import matplotlib.pyplot as plt
-
 
 tspan = np.linspace(0, 200, 1001)
 vol = 1e-19
 observable = 'Y3'
-
 
 def obj_func_cell_cycle(out):
     timestep = tspan[:-1]
@@ -39,18 +36,13 @@ def cupsoda_solver(matrix):
                memory_usage='sharedconstant',
                vol=10e-19)
     end_time = time.time()
+    print("Time taken {0}".format(end_time-start_time))
     obs = solver.concs_observables(squeeze=False)
     obs = np.array(obs)
-    plt.plot(solver.tspan, obs[:][observable].T)
-    plt.savefig('test2.png')
-    print(np.shape(obs))
-    print("Time taken {0}".format(end_time-start_time))
     print('out==', obs[0][0], obs[0][-1], '==out')
     sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
-    counter = 0
     for i in range(size_of_matrix):
         sensitivity_matrix[:, i] = obs[observable][i]
-    print(sensitivity_matrix)
     return sensitivity_matrix
 
 
@@ -69,10 +61,10 @@ def run_solver(matrix):
 
 def run():
 
-    savename = 'tyson_sensitivity'
     vals = np.linspace(.8, 1.2, 21)
     set_cupsoda_path("/home/pinojc/git/cupSODA")
-    directory = 'OUT'
+    savename = 'tyson_sensitivity_new'
+    directory = 'SensitivityData'
     sens = InitialConcentrationSensitivityAnalysis(model, tspan,
                                                    values_to_sample=vals,
                                                    observable=observable,
@@ -81,4 +73,5 @@ def run():
     sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
 
 if __name__ == '__main__':
+
     run()

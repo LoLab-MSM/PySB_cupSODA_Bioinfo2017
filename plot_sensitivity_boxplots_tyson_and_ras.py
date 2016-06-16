@@ -4,19 +4,14 @@ import matplotlib.pyplot as plt
 import mpl_toolkits.axes_grid1 as axgrid
 import numpy as np
 
-from models.ras_amp_pka import model as ras
+from models.ras_camp_pka import model as ras
 from pysb.examples.tyson_oscillator import model as tyson
 
 """
-Creates supplmental figure X and Y.
+Creates supplemental figure X and Y.
 Calculates sensitivities of each initial condition from pairwise interactions.
 
 """
-
-figs = os.path.join('.', 'FIGS')
-if not os.path.exists(figs):
-    os.makedirs(figs)
-
 
 def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
     proteins_of_interest = []
@@ -61,9 +56,9 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
     cax = divider.append_axes("top", size="5%", pad=0.3)
     cax.tick_params(labelsize=12)
 
-    if savename == 'tyson_sensitivity_boxplot.png':
+    if model.name == 'pysb.examples.tyson_oscillator':
         ticks = [-4, -3, -2, -1, 0, 1, 2, 3, 4]
-    if savename == 'ras_sensitivity_boxplot.png':
+    if model.name == 'models.ras_camp_pka':
         ticks = [-120, -60, 0, 60, 120]
 
     color_bar = fig.colorbar(im, cax=cax, ticks=ticks, orientation='horizontal')
@@ -73,7 +68,7 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
     ax2 = plt.subplot(2, 1, 2)
     ax2.boxplot(sens_ij_nm, vert=False, labels=None, showfliers=False)
     ax2.set_xlabel(x_axis_label, fontsize=12)
-    xtickNames = plt.setp(ax2, yticklabels=proteins_of_interest)
+    plt.setp(ax2, yticklabels=proteins_of_interest)
     ax2.yaxis.tick_left()
     ax1.annotate('A', xy=(0, 1), xycoords='axes fraction', fontsize=16,
                  xytext=(-55, 75), textcoords='offset points',
@@ -83,17 +78,24 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
                  ha='left', va='top')
     plt.tight_layout(h_pad=2.5)
     plt.subplots_adjust(top=0.9)
-    plt.savefig(os.path.join('FIGS', savename), bbox_tight='True')
+    plt.savefig(os.path.join('Figures', savename), bbox_tight='True')
     plt.show()
 
 
 # Supplemental figure
-create_boxplot_and_heatplot(tyson,
-                            os.path.join('RawData', 'sens_tyson_matrix.csv'),
-                            'Percent change in period',
-                            'tyson_sensitivity_boxplot.png')
+def create_supplement_figure_5():
+    create_boxplot_and_heatplot(tyson,
+                                os.path.join('SensitivityData', 'sens_tyson_matrix.csv'),
+                                'Percent change in period',
+                                'supp_figure_5_tyson_sensitivity.png')
+
+
 # Supplemental figure
-create_boxplot_and_heatplot(ras,
-                            os.path.join('OUT', 'cAMP_image_matrix.csv'),
-                            'Percent change in cAMP count',
-                            'ras_sensitivity_boxplot.png')
+def create_supplement_figure_7():
+    create_boxplot_and_heatplot(ras,
+                                os.path.join('SensitivityData', 'sens_ras_matrix.csv'),
+                                'Percent change in cAMP count',
+                                'supp_figure_7_ras_sensitivity.png')
+if __name__ == '__main__':
+    create_supplement_figure_5()
+    create_supplement_figure_7()

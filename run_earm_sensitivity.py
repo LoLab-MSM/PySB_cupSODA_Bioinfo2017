@@ -11,7 +11,6 @@ tspan = np.linspace(0, 20000, 100)
 option = '2'
 observable = 'cPARP'
 
-
 def likelihood(ysim_momp):
     if np.nanmax(ysim_momp) == 0:
         return -1
@@ -60,6 +59,7 @@ def run_solver(matrix):
     print("Time taken {0}".format(end_time - start_time))
     return sensitivity_matrix
 
+
 def run():
     """ Runs EARM sensitivty to initial conditions
 
@@ -67,27 +67,26 @@ def run():
 
     :return:
     """
-    vals = np.linspace(.8, 1.2, 11)
-
-    if option == '1':
-        new_params = load_params('Params/earm_parameter_set_1.txt')
-        savename = 'parameters_1_gpu_new'
-        directory = 'OUT'
-
-    if option == '2':
-        new_params = load_params('Params/earm_parameter_set_2.txt')
-        savename = 'parameters_2_gpu_new'
-        directory = 'OUT'
-
-    update_param_vals(model, new_params)
     set_cupsoda_path('/home/pinojc/git/cupSODA')
+    vals = np.linspace(.8, 1.2, 11)
+    directory = 'SensitivityData'
 
-    sens = InitialConcentrationSensitivityAnalysis(model, tspan,
-                                                   values_to_sample=vals,
-                                                   observable=observable,
+    new_params = load_params('Params/earm_parameter_set_1.txt')
+    savename = 'earm_parameters_1_gpu_new'
+    update_param_vals(model, new_params)
+    sens = InitialConcentrationSensitivityAnalysis(model, tspan, values_to_sample=vals, observable=observable,
+                                                   objective_function=likelihood)
+    sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
+
+    new_params = load_params('Params/earm_parameter_set_2.txt')
+    savename = 'earm_parameters_2_gpu_new'
+    update_param_vals(model, new_params)
+    sens = InitialConcentrationSensitivityAnalysis(model, tspan, values_to_sample=vals, observable=observable,
                                                    objective_function=likelihood)
 
     sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
+    return sens.sensitivity_list, sens.sensitivity_matrix
 
 if __name__ == '__main__':
+
     run()
