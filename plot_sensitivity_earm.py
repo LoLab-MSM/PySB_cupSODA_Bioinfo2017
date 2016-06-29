@@ -10,16 +10,8 @@ Creates supplemental figure X and Y
 Sensitivity of EARM with two different parameter sets that fit equally well.
 """
 
-def create_earm_boxplot(sensitivity_matrix, save_name):
-    if option == 1:
-        fig_number = 9
 
-    elif option == 2:
-        fig_number = 10
-        sensitivity_matrix = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_2.csv'))
-    else:
-        print('Need option 1 or 2')
-        return
+def create_earm_boxplot(sensitivity_matrix, save_name):
     proteins_of_interest = []
     for i in model.initial_conditions:
         proteins_of_interest.append(i[1].name)
@@ -30,7 +22,7 @@ def create_earm_boxplot(sensitivity_matrix, save_name):
     median = int(np.median(range(0, len(vals))))
 
     all_runs_1 = []
-
+    sensitivity_matrix[sensitivity_matrix!=0] = sensitivity_matrix[sensitivity_matrix!=0]-100
     length_matrix = len(sensitivity_matrix)
     len_vals = len(vals)
     for j in range(0, length_matrix, len_vals):
@@ -50,6 +42,7 @@ def create_earm_boxplot(sensitivity_matrix, save_name):
 
     v_max = max(np.abs(sensitivity_matrix.min()), sensitivity_matrix.max())
     v_min = -1 * v_max
+    print(v_max,v_min)
     n = len(sensitivity_matrix)
     im = ax1.imshow(sensitivity_matrix, interpolation='nearest',
                     origin='lower', cmap=plt.get_cmap(colors),
@@ -91,18 +84,23 @@ def create_earm_boxplot(sensitivity_matrix, save_name):
     plt.tight_layout(rect=[0, 0, 1, 1], h_pad=.4)
     plt.subplots_adjust(top=0.95, hspace=.2)
 
-    plt.savefig(os.path.join('Figures', '%s.png') % save_name,bbox_tight='True', dpi=300)
+    plt.savefig(os.path.join('Figures', '%s.png') % save_name, bbox_tight='True', dpi=300)
 
 
 def create_supplement_figure_9():
     data = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_1.csv'))
-    create_earm_boxplot(data,'supp_figure_9_earm_parameter_set_1')
+    create_earm_boxplot(data, 'supp_figure_9_earm_parameter_set_1')
 
 
 def create_supplement_figure_10():
     data = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_2.csv'))
-    create_earm_boxplot(data,'supp_figure_10_earm_parameter_set_2')
+    create_earm_boxplot(data, 'supp_figure_10_earm_parameter_set_2')
+
+def create_supplement_figure_11():
+    data = np.loadtxt(os.path.join('SensitivityData', 'earm_parameters_1_gpu_new_image_matrix.csv'))
+    create_earm_boxplot(data, 'supp_figure_11_earm_parameter_set_1')
 
 if __name__ == '__main__':
-    create_supplement_figure_9()
-    create_supplement_figure_10()
+    #create_supplement_figure_9()
+    #create_supplement_figure_10()
+    create_supplement_figure_11()

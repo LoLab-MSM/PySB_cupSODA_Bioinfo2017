@@ -12,6 +12,7 @@ observable = 'obs_cAMP'
 def obj_func_ras(out):
     return out.max()
 
+
 def cupsoda_solver(matrix):
     size_of_matrix = len(matrix)
     solver = CupSodaSolver(model, tspan, verbose=False)
@@ -24,9 +25,12 @@ def cupsoda_solver(matrix):
                vol=10e-19)
     end_time = time.time()
     obs = solver.concs_observables(squeeze=False)
+    obs = np.array(obs)
     print("Time taken {0}".format(end_time-start_time))
     print('out==', obs[0][0], obs[0][-1], '==out')
     sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
+    for i in range(size_of_matrix):
+        sensitivity_matrix[:, i] = obs[observable][i]
     return sensitivity_matrix
 
 
@@ -46,10 +50,10 @@ def run_solver(matrix):
 
 def run():
 
-    savename = 'cAMP'
+    savename = 'local_ras_sensitivity'
     vals = np.linspace(.8, 1.2, 21)
     set_cupsoda_path("/home/pinojc/git/cupSODA")
-    directory = 'OUT'
+    directory = 'SensitivityData'
     sens = InitialConcentrationSensitivityAnalysis(model, tspan,
                                                    values_to_sample=vals,
                                                    observable=observable,

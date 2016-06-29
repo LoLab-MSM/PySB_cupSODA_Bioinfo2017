@@ -34,7 +34,7 @@ def cupsoda_solver(matrix):
                max_steps=20000,
                obs_species_only=True,
                memory_usage='sharedconstant',
-               vol=10e-19)
+               vol=vol)
     end_time = time.time()
     print("Time taken {0}".format(end_time-start_time))
     obs = solver.concs_observables(squeeze=False)
@@ -73,5 +73,4 @@ def run():
     sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
 
 if __name__ == '__main__':
-
     run()

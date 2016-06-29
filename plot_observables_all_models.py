@@ -33,7 +33,7 @@ def observable_cell_cycle(model, time, save_name, observable_name):
     solver = pysb.integrate.Solver(model, time, rtol=RTOL, atol=ATOL, integrator='lsoda', mxstep=mxstep)
     solver.run()
     out = solver.yobs[observable_name]
-
+    out /= model.parameters['cyc0'].value
     timestep = time[:-1]
     y = out[:-1] - out[1:]
     times = []
@@ -46,7 +46,7 @@ def observable_cell_cycle(model, time, save_name, observable_name):
     plt.figure()
     plt.plot(time, out)
     plt.xlabel('Time (min)', fontsize=16)
-    plt.ylabel('cdc-U:cyclin-P (count)', fontsize=16)
+    plt.ylabel('active MPF / total cdc2', fontsize=16)
     x1 = np.where(time == times[0])
     x2 = np.where(time == times[1])
     x = [times[0], times[1]]
@@ -55,11 +55,12 @@ def observable_cell_cycle(model, time, save_name, observable_name):
     plt.axvline(x[1], linestyle='dashed', color='black')
     arrow_x_0 = x[1] - x[0]
     y_distance = yy[1]
-    plt.arrow(arrow_x_0, y_distance, x[1] - arrow_x_0 - 5, 0, head_width=55, head_length=3, color='k')
-    plt.arrow(arrow_x_0, y_distance, x[0] - arrow_x_0 + 5, 0, head_width=55, head_length=3, color='k')
+    plt.arrow(arrow_x_0, y_distance, x[1] - arrow_x_0 - 5, 0, head_width=.05, head_length=3, color='k')
+    plt.arrow(arrow_x_0, y_distance, x[0] - arrow_x_0 + 5, 0, head_width=.05, head_length=3, color='k')
     plt.xlim(0, 60)
-    plt.ylim(0, 1400)
+    plt.ylim(0, 1.0)
     plt.savefig('%s/%s_%s.png' % ('Figures', save_name, observable_name), dpi=150)
+    plt.savefig('%s/%s_%s.eps' % ('Figures', save_name, observable_name))
     plt.close()
 
 
@@ -135,5 +136,5 @@ def create_supplement_figure_8():
 
 if __name__ == '__main__':
     create_supplement_figure_4()
-    create_supplement_figure_6()
-    create_supplement_figure_8()
+    #create_supplement_figure_6()
+    #create_supplement_figure_8()
