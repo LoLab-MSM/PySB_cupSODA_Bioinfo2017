@@ -6,7 +6,7 @@ import numpy as np
 import pysb
 import pysb.integrate as integrate
 from pysb.bng import generate_equations
-from pysb_cupsoda import set_cupsoda_path, CupsodaSolver
+from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
 
 #name = sys.argv[1]
 name = 'earm'
@@ -64,7 +64,7 @@ if run == 'scipy':
 
 if run == 'cupSODA':
     set_cupsoda_path("/home/pinojc/git/cupSODA")
-    solver = CupsodaSolver(model, tspan, atol=ATOL, rtol=RTOL, verbose=False)
+    solver = CupSodaSolver(model, tspan, atol=ATOL, rtol=RTOL, verbose=False)
     output = "model,nsims,tpb,mem,cupsodatime,pythontime,rtol,atol,mxsteps,t_end,n_steps,deterministic,vol,card\n"
 
 
@@ -96,7 +96,8 @@ def main(number_particles):
         new_line = '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % (name,
                                                                     num_particles,
                                                                     str(i),
-                                                                    mem,solver.time,
+                                                                    mem,
+                                                                    solver._cupsoda_time,
                                                                     end_time - start_time,
                                                                     RTOL,
                                                                     ATOL,
