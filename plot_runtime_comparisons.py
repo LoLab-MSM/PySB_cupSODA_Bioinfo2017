@@ -137,6 +137,7 @@ def create_figure_1():
     plt.tight_layout()
     fig.subplots_adjust(hspace=.1, wspace=.01, left=.084, top=.93, bottom=0.1)
     plt.savefig(os.path.join(figs, 'figure_1.png'), bbox_tight='True')
+    plt.savefig(os.path.join(figs, 'figure_1.eps'), bbox_tight='True')
 
 
 if __name__ == '__main__':
