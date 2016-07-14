@@ -7,11 +7,13 @@ from pysb.integrate import Solver
 from pysb.util import update_param_vals, load_params
 from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
 from pysb.tools.sensitivity_analysis import InitialConcentrationSensitivityAnalysis
-from plot_sensitivity_earm import create_earm_boxplot
+plot = False
+if plot:
+    from plot_sensitivity_earm import create_earm_boxplot
 
 
 tspan = np.linspace(0, 20000, 100)
-observable = 'cPARP'
+observable = 'aSmac'
 
 
 def likelihood(ysim_momp):
@@ -38,8 +40,8 @@ def cupsoda_solver(matrix):
                gpu=0,
                max_steps=20000,
                obs_species_only=True,
-               memory_usage='sharedconstant',
-               vol=10e-19)
+               memory_usage='shared',
+               vol=10e-20)
     end_time = time.time()
     print("Time taken {0}".format(end_time-start_time))
     obs = np.array(solver.concs_observables(squeeze=False))
@@ -75,24 +77,26 @@ def run():
     vals = np.linspace(.8, 1.2, 11)
     directory = 'SensitivityData'
 
-    new_params = load_params(os.path.join('Params', 'earm_parameter_set_1.txt'))
-    savename = 'earm_parameters_1_gpu_new'
-    update_param_vals(model, new_params)
-    sens = InitialConcentrationSensitivityAnalysis(model, tspan, values_to_sample=vals, observable=observable,
-                                                   objective_function=likelihood)
-    sens.run(run_solver=run_solver, save_name=savename, output_directory=directory)
-    create_earm_boxplot(sens.sensitivity_matrix, 'local_run_earm_sensitivity_set_1')
-    quit()
-    new_params = load_params(os.path.join('Params', 'earm_parameter_set_2.txt'))
-    savename = 'earm_parameters_2_gpu_new'
+    new_params = load_params(os.path.join('Params', 'earm_parameter_set_one.txt'))
+    savename = 'local_earm_parameters_1'
     update_param_vals(model, new_params)
     sens = InitialConcentrationSensitivityAnalysis(model, tspan, values_to_sample=vals, observable=observable,
                                                    objective_function=likelihood)
 
     sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
-    create_earm_boxplot(sens.sensitivity_matrix, 'local_run_earm_sensitivity_set_2')
+    if plot:
+        create_earm_boxplot(sens.sensitivity_matrix, 'local_run_earm_sensitivity_set_1')
+
+    new_params = load_params(os.path.join('Params', 'earm_parameter_set_two.txt'))
+    savename = 'local_earm_parameters_2'
+    update_param_vals(model, new_params)
+    sens = InitialConcentrationSensitivityAnalysis(model, tspan, values_to_sample=vals, observable=observable,
+                                                   objective_function=likelihood)
+
+    sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
+    if plot:
+        create_earm_boxplot(sens.sensitivity_matrix, 'local_run_earm_sensitivity_set_2')
 
 
 if __name__ == '__main__':
-
     run()
