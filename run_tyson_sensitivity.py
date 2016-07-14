@@ -3,11 +3,12 @@ import numpy as np
 from pysb.integrate import Solver
 from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
 from pysb.tools.sensitivity_analysis import InitialConcentrationSensitivityAnalysis
-from pysb.examples.tyson_oscillator import model
+from models.tyson_oscillator_in_situ import model
 
 tspan = np.linspace(0, 200, 1001)
 vol = 1e-19
 observable = 'Y3'
+
 
 def obj_func_cell_cycle(out):
     timestep = tspan[:-1]
@@ -24,6 +25,7 @@ def obj_func_cell_cycle(out):
     local_times = np.array(local_times)
     local_freq = np.average(local_times)/len(local_times)*2
     return local_freq
+
 
 def cupsoda_solver(matrix):
     size_of_matrix = len(matrix)
