@@ -82,6 +82,7 @@ def observable_ras(model, time, save_name, observable_name):
     plt.xlim(0, 1000)
     plt.tight_layout()
     plt.savefig('%s/%s_%s.png' % ('Figures', save_name, observable_name), dpi=150)
+    plt.savefig('%s/%s_%s.eps' % ('Figures', save_name, observable_name))
     plt.close()
 
 
@@ -89,7 +90,7 @@ def observable_earm(model, time, save_name, observable_name):
     print_model_stats(model)
     solver = pysb.integrate.Solver(model, time, rtol=RTOL, atol=ATOL, integrator='lsoda', mxstep=mxstep)
     solver.run()
-    ysim_momp_norm = solver.yobs[observable_name] / np.nanmax(solver.yobs['cPARP'])
+    ysim_momp_norm = solver.yobs[observable_name] / np.nanmax(solver.yobs[observable_name])
     st, sc, sk = scipy.interpolate.splrep(time, ysim_momp_norm)
     try:
         t10 = scipy.interpolate.sproot((st, sc - 0.10, sk))[0]
@@ -101,19 +102,20 @@ def observable_earm(model, time, save_name, observable_name):
     plt.figure()
     plt.plot(time / 3600, ysim_momp_norm, 'b-', linewidth=2)
     plt.xlabel("Time (hr)", fontsize=16)
-    plt.ylabel('cPARP / PARP_0', fontsize=16)
+    plt.ylabel('aSmac / SMAC_0', fontsize=16)
     plt.plot(td / 3600, .5, 'ok', ms=15, mfc='none', mew=3)
     plt.axvline(td / 3600, linestyle='dashed', color='black')
     plt.ylim(-.05, 1.05)
     plt.xticks(fontsize=16)
     plt.yticks(fontsize=16)
     plt.savefig('%s/%s_%s.png' % ('Figures', save_name, observable_name), dpi=150)
+    plt.savefig('%s/%s_%s.eps' % ('Figures', save_name, observable_name))
     plt.close()
 
 
 def create_supplement_figure_4():
     tspan = np.linspace(0, 300, 1000)
-    observable = 'Y3'
+    observable = 'M'
     savename = 'supp_figure_4_tyson_output'
     observable_cell_cycle(tyson, tspan, savename, observable)
 
@@ -127,14 +129,14 @@ def create_supplement_figure_6():
 
 def create_supplement_figure_8():
     tspan = np.linspace(0, 20000, 100)
-    observable = 'cPARP'
-    new_params = load_params('Params/earm_parameter_set_2.txt')
-    savename = 'supp_figure_8_earm_output_parameter_set_2_gpu_new'
+    observable = 'aSmac'
+    new_params = load_params('Params/earm_parameter_set_one.txt')
+    savename = 'supp_figure_8_earm_output_parameter_set_one_gpu_new'
     update_param_vals(earm, new_params)
     observable_earm(earm, tspan, savename, observable)
 
 
 if __name__ == '__main__':
     create_supplement_figure_4()
-    #create_supplement_figure_6()
-    #create_supplement_figure_8()
+    create_supplement_figure_6()
+    create_supplement_figure_8()
