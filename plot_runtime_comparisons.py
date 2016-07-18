@@ -22,40 +22,35 @@ def create_figure_1():
     fig = plt.figure(figsize=(12, 7))
 
     for count, model in enumerate(['tyson', 'ras', 'earm']):
-        if model == 'tyson':
-            ax1 = plt.subplot2grid((3, 2), (0, 0))
-        if model == 'ras':
-            ax2 = plt.subplot2grid((3, 2), (1, 0), sharex=ax1)
-        if model == 'earm':
-            ax3 = plt.subplot2grid((3, 2), (2, 0), sharex=ax1)
-
         # SciPy
-        xdata = [d['nsims'] for d in scipy_data if d['model'] == model and d['num_cpu'] == 1]
-        ydata = [d['scipytime'] for d in scipy_data if d['model'] == model and d['num_cpu'] == 1]
-        if model == 'tyson':
-            ax1.plot(xdata, ydata, 'b-o', label='SciPy (lsoda)', ms=12, lw=3, mew=0, )
-        if model == 'ras':
-            ax2.plot(xdata, ydata, 'b-o', label='SciPy (lsoda)', ms=12, lw=3, mew=0, )
-        if model == 'earm':
-            ax3.plot(xdata, ydata, 'b-o', label='SciPy (lsoda)', ms=12, lw=3, mew=0, )
-
+        scipy_n_sim = [d['nsims'] for d in scipy_data if d['model'] == model and d['num_cpu'] == 1]
+        scipy_time = [d['scipytime'] for d in scipy_data if d['model'] == model and d['num_cpu'] == 1]
         # cupSODA
-        xdata = []
+        cupsoda_n_sim = []
         for x in [d['nsims'] for d in cupsoda_data if d['model'] == model and d['card'] == 'gtx980-diablo']:
-            if x not in xdata:
-                xdata.append(x)
-        ydata = []
-        for x in xdata:
-            ydata.append([d['pythontime'] for d in cupsoda_data
+            if x not in cupsoda_n_sim:
+                cupsoda_n_sim.append(x)
+        cupsoda_time = []
+        for x in cupsoda_n_sim:
+            cupsoda_time.append([d['pythontime'] for d in cupsoda_data
                           if d['model'] == model and d['mem'] == 2 and d['card'] == 'gtx980-diablo' and d[
                               'nsims'] == x])
-        if model == 'tyson':
-            ax1.plot(xdata, ydata, '-v', ms=12, lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
-        if model == 'ras':
-            ax2.plot(xdata, ydata, '-v', ms=12, lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
-        if model == 'earm':
-            ax3.plot(xdata, ydata, '-v', ms=12, lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
 
+        if model == 'tyson':
+            ax1 = plt.subplot2grid((3, 2), (0, 0))
+            ax1.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)', ms=12, lw=3, mew=0, )
+            ax1.plot(cupsoda_n_sim, cupsoda_time, '-v', ms=12, lw=3, mew=2, mec='red', color='red',
+                     label='PySB/cupSODA')
+        if model == 'ras':
+            ax2 = plt.subplot2grid((3, 2), (1, 0), sharex=ax1)
+            ax2.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)', ms=12, lw=3, mew=0, )
+            ax2.plot(cupsoda_n_sim, cupsoda_time, '-v', ms=12, lw=3, mew=2, mec='red', color='red',
+                     label='PySB/cupSODA')
+        if model == 'earm':
+            ax3 = plt.subplot2grid((3, 2), (2, 0), sharex=ax1)
+            ax3.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)', ms=12, lw=3, mew=0, )
+            ax3.plot(cupsoda_n_sim, cupsoda_time, '-v', ms=12, lw=3, mew=2, mec='red', color='red',
+                     label='PySB/cupSODA')
         plt.xscale('log')
         plt.yscale('log')
     x_limit = [0, 11000]
