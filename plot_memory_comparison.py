@@ -26,7 +26,7 @@ def create_supplement_figure_2():
 
         fmt = ['^-', 's-', '*-']
         colors = ['c', 'magenta', 'green', ]
-        labels = ['global', 'global+shared', 'global+shared+constant']
+        labels = ['global', 'shared', 'sharedconstant']
         mem = [0, 1, 2]
         for i in range(len(mem)):
             times = []
@@ -85,6 +85,7 @@ def create_supplement_figure_2():
     plt.tight_layout()
     plt.subplots_adjust(hspace=0.0)
     plt.savefig(os.path.join('Figures', 'supp_figure_2_compare_memory.png'), bbox_tight='True')
+    plt.savefig(os.path.join('Figures', 'supp_figure_2_compare_memory.eps'), bbox_tight='True')
 
 
 if __name__ == '__main__':
