@@ -103,7 +103,7 @@ def create_figure_1():
         proteins_of_interest.append(i[1].name)
     vals = np.linspace(.8, 1.2, 11)
     median = int(np.median(range(0, len(vals))))
-    image = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_1.csv'))
+    image = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_one.csv'))
 
     ax4 = plt.subplot2grid((3, 2), (0, 1), rowspan=3)
     all_runs_1 = []
@@ -122,7 +122,7 @@ def create_figure_1():
 
     ax4.boxplot(all_runs_1, vert=False, labels=None, showfliers=False)
     ax4.set_xlabel('Percent change in time-to-death', fontsize=f_size1)
-    xtickNames = plt.setp(ax4, yticklabels=proteins_of_interest)
+    xtickNames = plt.setp(ax4, yticklabels=np.sort(proteins_of_interest))
     ax4.yaxis.tick_right()
     plt.setp(xtickNames, fontsize=30)
     plt.tick_params(axis='y', which='major', labelsize=16)

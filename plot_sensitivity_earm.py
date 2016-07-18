@@ -15,7 +15,7 @@ def create_earm_boxplot(sensitivity_matrix, save_name):
     proteins_of_interest = []
     for i in model.initial_conditions:
         proteins_of_interest.append(i[1].name)
-
+    proteins_of_interest = np.sort(proteins_of_interest)
     colors = 'seismic'
 
     vals = np.linspace(.8, 1.2, 11)
@@ -89,12 +89,12 @@ def create_earm_boxplot(sensitivity_matrix, save_name):
 
 
 def create_supplement_figure_9():
-    data = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_1.csv'))
+    data = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_one.csv'))
     create_earm_boxplot(data, 'supp_figure_9_earm_parameter_set_1')
 
 
 def create_supplement_figure_10():
-    data = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_2.csv'))
+    data = np.loadtxt(os.path.join('SensitivityData', 'sens_earm_parameter_set_two.csv'))
     create_earm_boxplot(data, 'supp_figure_10_earm_parameter_set_2')
 
 

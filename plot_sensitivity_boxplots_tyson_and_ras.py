@@ -5,7 +5,7 @@ import mpl_toolkits.axes_grid1 as axgrid
 import numpy as np
 
 from models.ras_camp_pka import model as ras
-from pysb.examples.tyson_oscillator import model as tyson
+from models.tyson_oscillator_in_situ import model as tyson
 
 """
 Creates supplemental figure X and Y.
@@ -17,6 +17,7 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
     proteins_of_interest = []
     for i in model.initial_conditions:
         proteins_of_interest.append(i[1].name)
+    proteins_of_interest = np.sort(proteins_of_interest)
 
     colors = 'seismic'
 
@@ -56,7 +57,7 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
     cax = divider.append_axes("top", size="5%", pad=0.3)
     cax.tick_params(labelsize=12)
 
-    if model.name == 'pysb.examples.tyson_oscillator':
+    if model.name == 'models.tyson_oscillator_in_situ':
         ticks = [-4, -3, -2, -1, 0, 1, 2, 3, 4]
     if model.name == 'models.ras_camp_pka':
         ticks = [-120, -60, 0, 60, 120]
@@ -78,7 +79,8 @@ def create_boxplot_and_heatplot(model, data, x_axis_label, savename):
                  ha='left', va='top')
     plt.tight_layout(h_pad=2.5)
     plt.subplots_adjust(top=0.9)
-    plt.savefig(os.path.join('Figures', savename), bbox_tight='True')
+    plt.savefig(os.path.join('Figures', savename+'.png'), bbox_tight='True')
+    plt.savefig(os.path.join('Figures', savename+'.eps'), bbox_tight='True')
     plt.show()
 
 
@@ -87,7 +89,7 @@ def create_supplement_figure_5():
     create_boxplot_and_heatplot(tyson,
                                 os.path.join('SensitivityData', 'sens_tyson_matrix.csv'),
                                 'Percent change in period',
-                                'supp_figure_5_tyson_sensitivity.png')
+                                'supp_figure_5_tyson_sensitivity')
 
 
 # Supplemental figure
@@ -95,7 +97,7 @@ def create_supplement_figure_7():
     create_boxplot_and_heatplot(ras,
                                 os.path.join('SensitivityData', 'sens_ras_matrix.csv'),
                                 'Percent change in cAMP count',
-                                'supp_figure_7_ras_sensitivity.png')
+                                'supp_figure_7_ras_sensitivity')
 if __name__ == '__main__':
     create_supplement_figure_5()
     create_supplement_figure_7()
