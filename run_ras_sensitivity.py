@@ -59,7 +59,7 @@ def run():
                                                    observable=observable,
                                                    objective_function=obj_func_ras)
 
-    sens.run(run_solver=run_solver, save_name=savename, output_directory=directory)
+    sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
 
 if __name__ == '__main__':
     run()

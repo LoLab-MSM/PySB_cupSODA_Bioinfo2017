@@ -12,7 +12,7 @@ if plot:
     from plot_sensitivity_earm import create_earm_boxplot
 
 
-tspan = np.linspace(0, 20000, 100)
+tspan = np.linspace(0, 20000, 2000)
 observable = 'aSmac'
 
 

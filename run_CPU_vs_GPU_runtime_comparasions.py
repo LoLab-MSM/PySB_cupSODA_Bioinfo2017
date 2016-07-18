@@ -48,7 +48,7 @@ def main(tspan, model, simulations, vol, name, run):
                                                                         num_particles,
                                                                         str(i),
                                                                         mem,
-                                                                        solver._cupsoda_time,
+                                                                        solver._total_time,
                                                                         end_time - start_time,
                                                                         str(RTOL),
                                                                         str(ATOL),
