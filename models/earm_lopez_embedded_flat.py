@@ -30,7 +30,7 @@ Monomer('XIAP', ['bf'])
 
 Parameter('L_0', 3000.0)
 Parameter('R_0', 200.0)
-Parameter('flip_0', 100.0)
+Parameter('Flip_0', 100.0)
 Parameter('C8_0', 20000.0)
 Parameter('BAR_0', 1000.0)
 Parameter('bind_L_R_to_LR_kf', 4e-07)
@@ -224,7 +224,7 @@ Rule('pore_transport_dissociate_BakA_4_SmacC', MatchOnce(Bak(bf=5, s1=4, s2=1, s
 
 Initial(L(bf=None), L_0)
 Initial(R(bf=None), R_0)
-Initial(flip(bf=None), flip_0)
+Initial(flip(bf=None), Flip_0)
 Initial(C8(bf=None, state='pro'), C8_0)
 Initial(BAR(bf=None), BAR_0)
 Initial(Apaf(bf=None, state='I'), Apaf_0)
