@@ -1,78 +1,63 @@
-import time
 import numpy as np
-from pysb.integrate import Solver
-from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
-from pysb.tools.sensitivity_analysis import InitialConcentrationSensitivityAnalysis
+from pysb.simulator.scipyode import ScipyOdeSimulator
+from pysb.simulator.cupsoda import CupSodaSimulator
+from pysb.tools.sensitivity_analysis import InitialsSensitivity
 from models.tyson_oscillator_in_situ import model
-
-tspan = np.linspace(0, 200, 1001)
-vol = 1e-19
-observable = 'Y3'
-
-
-def obj_func_cell_cycle(out):
-    timestep = tspan[:-1]
-    y = out[:-1] - out[1:]
-    freq = 0
-    local_times = []
-    prev = y[0]
-    for n in range(1, len(y)):
-        if y[n] > 0 > prev:
-            local_times.append(timestep[n])
-            freq += 1
-        prev = y[n]
-
-    local_times = np.array(local_times)
-    local_freq = np.average(local_times)/len(local_times)*2
-    return local_freq
-
-
-def cupsoda_solver(matrix):
-    size_of_matrix = len(matrix)
-    solver = CupSodaSolver(model, tspan, verbose=False)
-    start_time = time.time()
-    solver.run(y0=matrix,
-               gpu=0,
-               max_steps=20000,
-               obs_species_only=True,
-               memory_usage='sharedconstant',
-               vol=vol)
-    end_time = time.time()
-    print("Time taken {0}".format(end_time-start_time))
-    obs = solver.concs_observables(squeeze=False)
-    obs = np.array(obs)
-    print('out==', obs[0][0], obs[0][-1], '==out')
-    sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
-    for i in range(size_of_matrix):
-        sensitivity_matrix[:, i] = obs[observable][i]
-    return sensitivity_matrix
-
-
-def run_solver(matrix):
-    size_of_matrix = len(matrix)
-    solver = Solver(model, tspan, integrator='lsoda')
-    sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
-    start_time = time.time()
-    for k in range(size_of_matrix):
-        solver.run(y0=matrix[k, :])
-        sensitivity_matrix[:, k] = solver.yobs[observable]
-    end_time = time.time()
-    print("Time taken {0}".format(end_time - start_time))
-    return sensitivity_matrix
-
+import logging
+from pysb.logging import setup_logger
+setup_logger(logging.INFO, file_output='tyson_run.log', console_output=True)
 
 def run():
+    # simulation time
+    tspan = np.linspace(0, 200, 5001)
+    # volume
+    vol = 1e-19
 
+    observable = 'Y3'
+
+    def obj_func_cell_cycle(out):
+        timestep = tspan[:-1]
+        y = out[:-1] - out[1:]
+        freq = 0
+        local_times = []
+        prev = y[0]
+        for n in range(1, len(y)):
+            if y[n] > 0 > prev:
+                local_times.append(timestep[n])
+                freq += 1
+            prev = y[n]
+
+        local_times = np.array(local_times)
+        local_freq = np.average(local_times) / len(local_times) * 2
+        return local_freq
+
+    # values to sample over
     vals = np.linspace(.8, 1.2, 21)
-    set_cupsoda_path("/home/pinojc/git/cupSODA")
+
     savename = 'tyson_sensitivity_new'
     directory = 'SensitivityData'
-    sens = InitialConcentrationSensitivityAnalysis(model, tspan,
-                                                   values_to_sample=vals,
-                                                   observable=observable,
-                                                   objective_function=obj_func_cell_cycle)
+    integrator_opt = {'rtol': 1e-8, 'atol': 1e-8, 'mxsteps': 20000}
+    integrator_opt_scipy = {'rtol': 1e-8, 'atol': 1e-8, 'mxstep': 20000}
+    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
+                                      memory_usage='sharedconstant', vol=vol,
+                                      integrator_options=integrator_opt)
 
-    sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
+    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
+                                     integrator_options=integrator_opt_scipy)
+
+    sens = InitialsSensitivity(
+            cupsoda_solver,
+            # scipy_solver,
+            values_to_sample=vals,
+            observable=observable,
+            objective_function=obj_func_cell_cycle)
+
+    sens.run(save_name=savename, out_dir=directory)
+
+    sens.create_boxplot_and_heatplot(save_name='tyson_sens', show=True)
+    sens.create_individual_pairwise_plots(save_name='tyson_pairwise')
+    sens.create_plot_p_h_pprime('tyson_phprime')
+
 
 if __name__ == '__main__':
     run()
