@@ -61,10 +61,9 @@ def table_2_print_stats_on_memory(model):
     data2['sharedconstant'] = shar_cons
     data2['speed_1'] = (glob - shared) / glob * -100
     data2['speed_2'] = (shared - shar_cons) / shared * -100
-
-    string = data2[
-        ['model', 'nsims', 'global', 'shared', 'speed_1', 'sharedconstant',
-         'speed_2']].to_string(index=False)
+    cols = ['model', 'nsims', 'global', 'shared', 'speed_1', 'sharedconstant',
+            'speed_2']
+    string = data2[cols].to_string(index=False)
     print(string)
 
 
@@ -130,35 +129,30 @@ def create_figure_1():
             ax3.plot(cupsoda_n_sims, cupsoda_time, marker='^', ls='-', ms=12,
                      lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
 
-    ax1.set_xscale('log')
-    ax2.set_xscale('log')
-    ax3.set_xscale('log')
-    ax1.set_yscale('log')
-    ax2.set_yscale('log')
-    ax3.set_yscale('log')
+    f_size1 = 18
+    f_size2 = 24
+
     x_limit = [0, 11000]
-    ax1.set_xlim(x_limit)
+    y_limit = [0, 1000]
+    for ax in [ax1, ax2, ax3]:
+
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+        ax.set_xlim(x_limit)
+        ax.set_ylim(y_limit)
+        ax.yaxis.set_tick_params(labelsize=f_size1)
+
     ax1.set_ylim(0, 100)
-    ax2.set_xlim(x_limit)
-    ax2.set_ylim(0, 1000)
-    ax3.set_xlim(x_limit)
-    ax3.set_ylim(0, 1000)
 
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
 
-    ax1.set_yticks(ax1.get_yticks()[3:])
+    ax1.set_yticks(ax1.get_yticks()[1:])
     ax2.set_yticks(ax2.get_yticks()[3:])
 
-    f_size1 = 18
-    f_size2 = 24
-
-    ax1.yaxis.set_tick_params(labelsize=f_size1)
-    ax2.yaxis.set_tick_params(labelsize=f_size1)
-    ax3.yaxis.set_tick_params(labelsize=f_size1)
     ax3.xaxis.set_tick_params(labelsize=f_size1)
-    ax1.legend(fontsize=14, bbox_to_anchor=(.9, 1.19), fancybox=True)
-
+    leg= ax1.legend(fontsize=14, bbox_to_anchor=(.9, 1.19), fancybox=True, )
+    leg.get_frame().set_alpha(1)
     ax2.set_ylabel('Time (s)', fontsize=f_size1)
     ax3.set_xlabel("Number of simulations", fontsize=f_size1)
 
@@ -187,37 +181,38 @@ def create_figure_1():
         proteins_of_interest.append(i[1].name)
     proteins_of_interest = sorted(proteins_of_interest)
     vals = np.linspace(.8, 1.2, 11)
-    median = int(np.median(range(0, len(vals))))
+
     p_matrix = np.loadtxt(
             os.path.join('SensitivityData', 'earm_parameters_1_p_matrix.csv'))
     p_prime_matrix = np.loadtxt(
             os.path.join('SensitivityData',
                          'earm_parameters_1_p_prime_matrix.csv'))
 
+    sens_ij_nm = []
     sens_matrix = p_matrix - p_prime_matrix
-    all_runs_1 = []
     length_values = len(vals)
-    length_image = len(sens_matrix)
+    length_image = len(proteins_of_interest) * length_values
+
+    # separate each species sensitivity
     for j in range(0, length_image, length_values):
         per_protein1 = []
         for i in range(0, length_image, length_values):
-            if i == j:
-                continue
-            tmp = sens_matrix[j:j + length_values, i:i + length_values].copy()
-            tmp -= tmp[median, :]
-            per_protein1.append(tmp)
-        all_runs_1.append(per_protein1)
-
-    ax4.boxplot(all_runs_1, vert=False, labels=None, showfliers=False)
+            if i != j:
+                tmp = sens_matrix[j:j + length_values,
+                      i:i + length_values].copy()
+                per_protein1.append(tmp)
+        sens_ij_nm.append(per_protein1)
+    ax4.boxplot(sens_ij_nm[::-1], vert=False, labels=None, showfliers=False)
     ax4.set_xlabel('Percent change in time-to-death', fontsize=f_size1)
     xtick_names = plt.setp(ax4, yticklabels=reversed(proteins_of_interest))
     ax4.yaxis.tick_right()
     plt.setp(xtick_names, fontsize=30)
     plt.tick_params(axis='y', which='major', labelsize=16)
     plt.tick_params(axis='x', which='major', labelsize=18)
-    v_max = max(np.abs(p_matrix.min()), p_matrix.max())
-    v_min = -1 * v_max
-    ax4.set_xlim(v_min - 2, v_max + 2)
+    ax4.set_xlim(-15, 15)
+    ticks = [-10, -5, 0, 5, 10]
+    ax4.xaxis.set_ticks(ticks)
+    ax4.set_xticklabels(ticks)
     ax4.annotate('D', xy=(0, 1), xycoords='axes fraction', fontsize=f_size2,
                  xytext=(0, 25), textcoords='offset points',
                  ha='left', va='top')
@@ -233,7 +228,7 @@ def create_supplement_figure_1():
     gpu_timings = os.path.join('TimingData', 'new_gpu_timing_all.csv')
     cupsoda = pd.read_csv(gpu_timings)
     cupsoda = cupsoda[cupsoda['card'] == 'gtx-980-ti']
-    cupsoda = cupsoda[cupsoda['tpb'] == 32]
+    cupsoda = cupsoda[cupsoda['tpb'] == 16]
     cupsoda = cupsoda[cupsoda['mem'] == 2]
 
     datafile = os.path.join('TimingData', 'scipy_timings.csv')
@@ -287,13 +282,16 @@ def create_supplement_figure_1():
 
         plt.xscale('log')
         plt.yscale('log')
-    ax1.set_xlim(0, 10000)
+
+    f_size1 = 14
+    f_size2 = 20
+    x_lim = [0, 10000]
+    for ax in [ax1, ax2, ax3]:
+        ax.set_xlim(x_lim)
+        ax.yaxis.set_tick_params(labelsize=f_size1)
+
     ax1.set_ylim(0, 100)
-
-    ax2.set_xlim(0, 10000)
     ax2.set_ylim(0, 1000)
-
-    ax3.set_xlim(0, 10000)
     ax3.set_ylim(0, 1000)
 
     plt.setp(ax1.get_xticklabels(), visible=False)
@@ -302,12 +300,6 @@ def create_supplement_figure_1():
     ax1.set_yticks(ax1.get_yticks()[3:])
     ax2.set_yticks(ax2.get_yticks()[3:])
 
-    f_size1 = 14
-    f_size2 = 20
-
-    ax1.yaxis.set_tick_params(labelsize=f_size1)
-    ax2.yaxis.set_tick_params(labelsize=f_size1)
-    ax3.yaxis.set_tick_params(labelsize=f_size1)
     ax3.xaxis.set_tick_params(labelsize=f_size1)
     ax1.legend(fontsize=14, bbox_to_anchor=(.65, 1.19), fancybox=True)
 
@@ -351,9 +343,9 @@ def create_supplement_figure_1():
 def create_supplement_figure_2():
     gpu_timings = os.path.join('TimingData', 'new_gpu_timing_all.csv')
     cupsoda = pd.read_csv(gpu_timings)
-    cupsoda = cupsoda[cupsoda['card'] == 'gtx-760']
+    cupsoda = cupsoda[cupsoda['card'] == 'gtx-980-ti']
     cupsoda = cupsoda[cupsoda['tpb'] == 16]
-    plt.figure()
+    plt.figure(figsize=(7,5))
     ax1 = plt.subplot2grid((3, 1), (0, 0))
     ax2 = plt.subplot2grid((3, 1), (1, 0))
     ax3 = plt.subplot2grid((3, 1), (2, 0))
@@ -384,11 +376,18 @@ def create_supplement_figure_2():
 
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
-    ax1.yaxis.set_tick_params(labelsize=14)
-    ax2.yaxis.set_tick_params(labelsize=14)
-    ax3.yaxis.set_tick_params(labelsize=14)
+    x_lim = [-10, 10000]
+    for ax in [ax1, ax2, ax3]:
+        ax.set_yscale('log', base=10)
+        ax.set_xscale('log', base=10)
+        ax.yaxis.set_tick_params(labelsize=14)
+        ax.set_xlim(x_lim)
+    ax1.set_ylim(.01, 50)
+    ax2.set_ylim(2, 200)
+    ax3.set_ylim(2, 200)
 
-    ax1.legend(fontsize=14, bbox_to_anchor=(.75, 1.0), fancybox=True)
+    leg = ax1.legend(fontsize=14, bbox_to_anchor=(.35, .35), fancybox=True)
+    leg.get_frame().set_alpha(1)
     ax2.set_ylabel('Time (s)', fontsize=14)
     ax3.set_xlabel("Number of simulations", fontsize=14)
 
@@ -411,14 +410,6 @@ def create_supplement_figure_2():
     ax3.annotate('EARM', xy=(0, 1), xycoords='axes fraction', fontsize=20,
                  xytext=(5, -5),
                  textcoords='offset points', ha='left', va='top')
-
-    x_lim = [-10, 10000]
-    ax1.set_xlim(x_lim)
-    ax1.set_ylim(.01, 50)
-    ax2.set_xlim(x_lim)
-    ax2.set_ylim(2, 200)
-    ax3.set_xlim(x_lim)
-    ax3.set_ylim(2, 200)
 
     plt.tight_layout()
     plt.subplots_adjust(hspace=0.0)
@@ -471,17 +462,20 @@ def create_supplement_figure_3():
             if model == 'earm':
                 ax3.plot(num_sims, times, fmt[n], ms=10, lw=3, mew=2,
                          mec=colors[n], color=colors[n], label=labels[n])
-    ax1.set_xscale('log')
-    ax2.set_xscale('log')
-    ax3.set_xscale('log')
-    ax1.set_yscale('log')
-    ax2.set_yscale('log')
-    ax3.set_yscale('log')
+    y_lim = [1, 500]
+    x_lim = [10, 10000]
+
+    for ax in [ax1, ax2, ax3]:
+        ax.set_xlim(x_lim)
+        ax.set_ylim(y_lim)
+        ax.set_xscale('log')
+        ax.set_yscale('log')
+        ax.yaxis.set_tick_params(labelsize=14)
+
+    ax1.set_ylim(.01, 500)
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
-    ax1.yaxis.set_tick_params(labelsize=14)
-    ax2.yaxis.set_tick_params(labelsize=14)
-    ax3.yaxis.set_tick_params(labelsize=14)
+
     ax1.legend(fontsize=14, bbox_to_anchor=(.8, 1.1), fancybox=True, ncol=2)
     ax2.set_ylabel('Time (s)', fontsize=14)
     ax3.set_xlabel("Number of simulations", fontsize=14)
@@ -506,14 +500,6 @@ def create_supplement_figure_3():
                  xytext=(5, -5),
                  textcoords='offset points', ha='left', va='top')
 
-    y_lim = [1, 500]
-    x_lim = [10, 10000]
-    ax1.set_xlim(x_lim)
-    ax1.set_ylim(.01, 500)
-    ax2.set_xlim(x_lim)
-    ax2.set_ylim(y_lim)
-    ax3.set_xlim(x_lim)
-    ax3.set_ylim(y_lim)
     plt.tight_layout()
     plt.subplots_adjust(hspace=0.0)
     plt.savefig(os.path.join('Figures', 'supp_figure_3_compare_gpu.png'),
@@ -606,23 +592,23 @@ def create_tpb(mem, cupsoda):
     ax3.legend(fontsize=14, loc=0, fancybox=True, ncol=1)
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
-    ax1.yaxis.set_tick_params(labelsize=14)
-    ax2.yaxis.set_tick_params(labelsize=14)
-    ax3.yaxis.set_tick_params(labelsize=14)
+
     y_lim = [1, 5000]
     x_lim = [10, 100000]
-    ax1.set_xlim(x_lim)
+
+    for ax in [ax1, ax2, ax3]:
+        ax.set_xlim(x_lim)
+        ax.set_ylim(y_lim)
+        ax.yaxis.set_tick_params(labelsize=14)
+
     ax1.set_ylim(.01, 500)
-    ax2.set_xlim(x_lim)
-    ax2.set_ylim(y_lim)
-    ax3.set_xlim(x_lim)
-    ax3.set_ylim(y_lim)
     plt.tight_layout()
     plt.subplots_adjust(hspace=0.0)
     plt.savefig('compare_tpb_{}.png'.format(mem), bbox_tight='True')
 
 
 if __name__ == '__main__':
+
     print_table_1('tyson')
     print_table_1('ras')
     print_table_1('earm')
