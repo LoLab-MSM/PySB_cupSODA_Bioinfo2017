@@ -36,8 +36,8 @@ def run():
 
     savename = 'tyson_sensitivity_new'
     directory = 'SensitivityData'
-    integrator_opt = {'rtol': 1e-8, 'atol': 1e-8, 'mxsteps': 20000}
-    integrator_opt_scipy = {'rtol': 1e-8, 'atol': 1e-8, 'mxstep': 20000}
+    integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'mxsteps': 20000}
+    integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
     cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
                                       memory_usage='sharedconstant', vol=vol,
                                       integrator_options=integrator_opt)

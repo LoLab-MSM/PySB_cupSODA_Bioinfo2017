@@ -43,8 +43,8 @@ def run():
     vol = 1e-19
     directory = 'SensitivityData'
 
-    integrator_opt = {'rtol': 1e-3, 'atol': 1e-3, 'mxsteps': 20000}
-    integrator_opt_scipy = {'rtol': 1e-8, 'atol': 1e-8, 'mxstep': 20000}
+    integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'mxsteps': 20000}
+    integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
 
     new_params = load_params(os.path.join('Params',
                                           'earm_parameter_set_one.txt'))

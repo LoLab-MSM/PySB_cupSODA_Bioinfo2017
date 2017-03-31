@@ -1,65 +1,50 @@
-import time
 import numpy as np
-from models.ras_amp_pka import model
-from pysb.integrate import Solver
-from pysb.simulator.cupsoda import set_cupsoda_path, CupSodaSolver
-from pysb.tools.sensitivity_analysis import InitialConcentrationSensitivityAnalysis
-
-tspan = np.linspace(0, 1500, 100)
-observable = 'obs_cAMP'
-
-
-def obj_func_ras(out):
-    return out.max()
-
-
-def cupsoda_solver(matrix):
-    size_of_matrix = len(matrix)
-    solver = CupSodaSolver(model, tspan, verbose=False)
-    start_time = time.time()
-    solver.run(y0=matrix,
-               gpu=0,
-               max_steps=20000,
-               obs_species_only=True,
-               memory_usage='shared',
-               vol=10e-19)
-    end_time = time.time()
-    obs = solver.concs_observables(squeeze=False)
-    obs = np.array(obs)
-    print("Time taken {0}".format(end_time-start_time))
-    print('out==', obs[0][0], obs[0][-1], '==out')
-    sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
-    for i in range(size_of_matrix):
-        sensitivity_matrix[:, i] = obs[observable][i]
-    return sensitivity_matrix
-
-
-def run_solver(matrix):
-    size_of_matrix = len(matrix)
-    solver = Solver(model, tspan, integrator='lsoda')
-    sensitivity_matrix = np.zeros((len(tspan), size_of_matrix))
-    start_time = time.time()
-    for k in range(size_of_matrix):
-        print(k,size_of_matrix)
-        solver.run(y0=matrix[k, :])
-        sensitivity_matrix[:, k] = solver.yobs[observable]
-    end_time = time.time()
-    print("Time taken {0}".format(end_time - start_time))
-    return sensitivity_matrix
+from models.ras_camp_pka import model
+from pysb.simulator.scipyode import ScipyOdeSimulator
+from pysb.simulator.cupsoda import CupSodaSimulator
+from pysb.tools.sensitivity_analysis import InitialsSensitivity
+import logging
+from pysb.logging import setup_logger
+setup_logger(logging.INFO, file_output='ras.log', console_output=True)
 
 
 def run():
+    def obj_func_ras(out):
+        return out.max()
+    tspan = np.linspace(0, 1500, 301)
 
-    savename = 'local_ras_sensitivity'
-    vals = np.linspace(.8, 1.2, 21)
-    set_cupsoda_path("/home/pinojc/git/cupSODA")
+    observable = 'obs_cAMP'
+
+    vals = np.linspace(.8, 1.2, 11)
+
+    integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'mxsteps': 20000}
+    integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
+    vol = 1e-19
+
+    cupsoda_solver = CupSodaSimulator(model, tspan, gpu=0,
+                                      memory_usage='sharedconstant',
+                                      vol=vol,
+                                      integrator_options=integrator_opt)
+
+    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
+                                     integrator_options=integrator_opt_scipy)
+
+    sens = InitialsSensitivity(
+            cupsoda_solver,
+            # scipy_solver,
+            values_to_sample=vals,
+            observable=observable,
+            objective_function=obj_func_ras
+    )
+
     directory = 'SensitivityData'
-    sens = InitialConcentrationSensitivityAnalysis(model, tspan,
-                                                   values_to_sample=vals,
-                                                   observable=observable,
-                                                   objective_function=obj_func_ras)
+    savename = 'local_ras_sensitivity'
 
-    sens.run(run_solver=cupsoda_solver, save_name=savename, output_directory=directory)
+    sens.run(save_name=savename, out_dir=directory)
+
+    sens.create_boxplot_and_heatplot(x_axis_label='',
+                                     save_name='ras_model_sensitivity',
+                                     show=True)
 
 if __name__ == '__main__':
     run()
