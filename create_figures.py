@@ -114,17 +114,17 @@ def create_figure_1():
         cupsoda_time = np.array(cupsoda_tmp['cupsodatime'])
 
         if model == 'tyson':
-            ax1.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)',
+            ax1.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy/LSODA',
                      ms=12, lw=3, mew=0, )
             ax1.plot(cupsoda_n_sims, cupsoda_time, marker='^', ls='-', ms=12,
                      lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
         if model == 'ras':
-            ax2.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)',
+            ax2.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy/LSODA',
                      ms=12, lw=3, mew=0, )
             ax2.plot(cupsoda_n_sims, cupsoda_time, marker='^', ls='-', ms=12,
                      lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
         if model == 'earm':
-            ax3.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)',
+            ax3.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy/LSODA',
                      ms=12, lw=3, mew=0, )
             ax3.plot(cupsoda_n_sims, cupsoda_time, marker='^', ls='-', ms=12,
                      lw=3, mew=2, mec='red', color='red', label='PySB/cupSODA')
@@ -147,7 +147,7 @@ def create_figure_1():
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.setp(ax2.get_xticklabels(), visible=False)
 
-    ax1.set_yticks(ax1.get_yticks()[1:])
+    ax1.set_yticks(ax1.get_yticks()[2:])
     ax2.set_yticks(ax2.get_yticks()[3:])
 
     ax3.xaxis.set_tick_params(labelsize=f_size1)
@@ -250,7 +250,7 @@ def create_supplement_figure_1():
 
         if model == 'tyson':
             ax1 = plt.subplot2grid((3, 1), (0, 0))
-            ax1.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)',
+            ax1.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy/LSODA',
                      ms=12, lw=3, mew=0, )
             ax1.plot(cupsoda_n_sims, cupsoda_raw_time, '-v', ms=12, lw=3,
                      mew=2, mec='red', color='red',
@@ -261,7 +261,7 @@ def create_supplement_figure_1():
 
         if model == 'ras':
             ax2 = plt.subplot2grid((3, 1), (1, 0), sharex=ax1)
-            ax2.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)',
+            ax2.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy/LSODA',
                      ms=12, lw=3, mew=0, )
             ax2.plot(cupsoda_n_sims, cupsoda_raw_time, '-v', ms=12, lw=3,
                      mew=2, mec='red', color='red',
@@ -271,7 +271,7 @@ def create_supplement_figure_1():
                      label='cupSODA')
         if model == 'earm':
             ax3 = plt.subplot2grid((3, 1), (2, 0), sharex=ax1)
-            ax3.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy (lsoda)',
+            ax3.plot(scipy_n_sim, scipy_time, 'b-o', label='SciPy/LSODA',
                      ms=12, lw=3, mew=0, )
             ax3.plot(cupsoda_n_sims, cupsoda_raw_time, '-v', ms=12, lw=3,
                      mew=2, mec='red', color='red',
@@ -609,16 +609,16 @@ def create_tpb(mem, cupsoda):
 
 if __name__ == '__main__':
 
-    print_table_1('tyson')
-    print_table_1('ras')
-    print_table_1('earm')
+    # print_table_1('tyson')
+    # print_table_1('ras')
+    # print_table_1('earm')
 
-    table_2_print_stats_on_memory('tyson')
-    table_2_print_stats_on_memory('ras')
-    table_2_print_stats_on_memory('earm')
-    table_3_print_stats_on_memory('tyson')
-    table_3_print_stats_on_memory('ras')
-    table_3_print_stats_on_memory('earm')
+    # table_2_print_stats_on_memory('tyson')
+    # table_2_print_stats_on_memory('ras')
+    # table_2_print_stats_on_memory('earm')
+    # table_3_print_stats_on_memory('tyson')
+    # table_3_print_stats_on_memory('ras')
+    # table_3_print_stats_on_memory('earm')
 
     create_figure_1()
     create_supplement_figure_1()
