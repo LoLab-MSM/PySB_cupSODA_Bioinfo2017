@@ -1,0 +1,39 @@
+2018-12-06 12:25:43.544 - pysb - INFO - Logging started on PySB version 0.1.11+661.g011b713
+2018-12-06 12:25:43.544 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-06 12:25:43.575 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-06 12:25:45.167 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable aSmac
+2018-12-06 12:26:04.820 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 09:53:01.130 - pysb - INFO - Logging started on PySB version 0.1.11+661.g011b713
+2018-12-11 09:53:01.130 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-11 09:53:01.340 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-11 09:53:03.188 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable aSmac
+2018-12-11 09:53:23.157 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 10:49:58.168 - pysb - INFO - Logging started on PySB version 0.1.11+661.g011b713
+2018-12-11 10:49:58.169 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-11 10:49:58.346 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-11 10:49:59.918 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable aSmac
+2018-12-11 10:50:18.831 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 10:52:56.718 - pysb - INFO - Logging started on PySB version 0.1.11+661.g011b713
+2018-12-11 10:52:56.719 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-11 10:52:56.896 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-11 10:52:58.618 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable aSmac
+2018-12-11 10:53:18.420 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 13:25:05.619 - pysb - INFO - Logging started on PySB version 0.1.11+661.g011b713
+2018-12-11 13:25:05.619 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-11 13:25:05.698 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-11 13:25:07.270 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable aSmac
+2018-12-11 13:25:26.110 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 13:29:12.732 - pysb - INFO - Logging started on PySB version 0.1.11+661.g011b713
+2018-12-11 13:29:12.733 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-11 13:29:12.774 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-11 13:29:14.308 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable aSmac
+2018-12-11 13:29:33.039 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 13:29:33.069 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 1 of 1
+2018-12-11 13:29:34.736 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] All simulation(s) complete
+2018-12-11 13:29:34.842 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-11 13:29:34.851 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 1 of 25410
+2018-12-11 13:29:36.417 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 2 of 25410
+2018-12-11 13:29:38.074 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 3 of 25410
+2018-12-11 13:29:39.819 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 4 of 25410
+2018-12-11 13:29:41.318 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 5 of 25410
+2018-12-11 13:29:42.981 - pysb.simulator.scipyode - INFO - [models.earm_lopez_embedded_flat] Running simulation 6 of 25410
