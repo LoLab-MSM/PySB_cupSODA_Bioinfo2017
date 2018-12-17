@@ -1,0 +1,12 @@
+2018-12-17 14:09:10.373 - pysb - INFO - Logging started on PySB version 0.1.11+712.g250a96c
+2018-12-17 14:09:10.373 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-17 14:09:10.388 - pysb.bng - INFO - [models.tyson_oscillator_in_situ] Generating reaction network
+2018-12-17 14:09:10.628 - pysb.tools.sensitivity_analysis - INFO - [models.tyson_oscillator_in_situ] InitialsSensitivity created for observable Y3
+2018-12-17 14:09:11.088 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Simulation(s) started
+2018-12-17 14:09:11.100 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Running cupSODA: /usr/local/share/cupSODA/cupSODA /tmp/models_tyson_oscillator_in_situ_7tguBV/INPUT 1 /tmp/models_tyson_oscillator_in_situ_7tguBV/OUTPUT models_tyson_oscillator_in_situ 0 0 2 0
+2018-12-17 14:09:12.139 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA reported time: 0.720898 seconds
+2018-12-17 14:09:12.170 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA + I/O time: 1.06915307045 seconds
+2018-12-17 14:09:12.175 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Simulation(s) started
+2018-12-17 14:09:12.284 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Running cupSODA: /usr/local/share/cupSODA/cupSODA /tmp/models_tyson_oscillator_in_situ_5Oc8K5/INPUT 14 /tmp/models_tyson_oscillator_in_situ_5Oc8K5/OUTPUT models_tyson_oscillator_in_situ 0 0 2 0
+2018-12-17 14:09:35.714 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA reported time: 10.424389 seconds
+2018-12-17 14:09:41.283 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA + I/O time: 28.998169899 seconds
