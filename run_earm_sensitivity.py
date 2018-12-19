@@ -51,10 +51,7 @@ def run():
     savename = 'local_earm_parameters_1'
     update_param_vals(model, new_params1)
 
-    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
-                                      memory_usage='sharedconstant',
-                                      vol=vol,
-                                      integrator_options=integrator_opt)
+    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0)
 
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
@@ -81,7 +78,7 @@ def run():
     savename = 'local_earm_parameters_2'
     update_param_vals(model, new_params2)
     cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
-                                      memory_usage='sharedconstant', vol=vol,
+                                      #memory_usage='sharedconstant', vol=vol,
                                       integrator_options=integrator_opt)
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
