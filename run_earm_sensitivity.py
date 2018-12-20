@@ -43,7 +43,7 @@ def run():
     vol = 1e-19
     directory = 'SensitivityData'
 
-    integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'mxsteps': 20000}
+    integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'max_steps': 20000, 'memory_usage':'global','vol':vol}
     integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
 
     new_params1 = load_params(os.path.join('Params',
@@ -51,14 +51,14 @@ def run():
     savename = 'local_earm_parameters_1'
     update_param_vals(model, new_params1)
 
-    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0)
+    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0, integrator_options=integrator_opt)
 
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            # cupsoda_solver,
-            scipy_solver,
+            cupsoda_solver,
+            #scipy_solver,
             values_to_sample=vals,
             observable=observable,
             objective_function=likelihood)
