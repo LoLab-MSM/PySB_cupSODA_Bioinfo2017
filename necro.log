@@ -1,0 +1,38 @@
+2018-12-27 16:12:51.098 - pysb - INFO - Logging started on PySB version 0.1.11+728.g3f65185.dirty
+2018-12-27 16:12:51.099 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-27 16:12:51.108 - pysb.bng - INFO - [models.earm_lopez_embedded_flat] Generating reaction network
+2018-12-27 16:12:52.036 - pysb.simulator.scipyode - WARNING - [models.earm_lopez_embedded_flat] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2018-12-27 16:12:52.202 - pysb.tools.sensitivity_analysis - INFO - [models.earm_lopez_embedded_flat] InitialsSensitivity created for observable MLKLa_obs
+2018-12-27 16:13:02.741 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Simulation(s) started
+2018-12-27 16:13:02.815 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] Running cupSODA: /usr/local/share/cupSODA/cupSODA /tmp/models_earm_lopez_embedded_flat_L8H0yv/INPUT 1 /tmp/models_earm_lopez_embedded_flat_L8H0yv/OUTPUT models_earm_lopez_embedded_flat 0 0 0 0
+2018-12-27 16:13:04.001 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] cupSODA reported time: 0.944155 seconds
+2018-12-27 16:13:04.009 - pysb.simulator.cupsoda - INFO - [models.earm_lopez_embedded_flat] cupSODA + I/O time: 1.19357299805 seconds
+2018-12-27 16:15:31.054 - pysb - INFO - Logging started on PySB version 0.1.11+728.g3f65185.dirty
+2018-12-27 16:15:31.054 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-27 16:15:31.062 - pysb.bng - INFO - [models.necro] Generating reaction network
+2018-12-27 16:15:31.524 - pysb.simulator.scipyode - WARNING - [models.necro] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2018-12-27 16:15:31.584 - pysb.tools.sensitivity_analysis - INFO - [models.necro] InitialsSensitivity created for observable MLKLa_obs
+2018-12-27 16:15:36.393 - pysb.simulator.cupsoda - INFO - [models.necro] Simulation(s) started
+2018-12-27 16:15:36.442 - pysb.simulator.cupsoda - INFO - [models.necro] Running cupSODA: /usr/local/share/cupSODA/cupSODA /tmp/models_necro_SHhQ5q/INPUT 1 /tmp/models_necro_SHhQ5q/OUTPUT models_necro 0 0 0 0
+2018-12-27 16:15:37.194 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA reported time: 0.267097 seconds
+2018-12-27 16:15:37.200 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA + I/O time: 0.75878405571 seconds
+2018-12-27 16:16:44.545 - pysb - INFO - Logging started on PySB version 0.1.11+728.g3f65185.dirty
+2018-12-27 16:16:44.545 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-27 16:16:44.553 - pysb.bng - INFO - [models.necro] Generating reaction network
+2018-12-27 16:16:44.950 - pysb.simulator.scipyode - WARNING - [models.necro] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2018-12-27 16:16:45.002 - pysb.tools.sensitivity_analysis - INFO - [models.necro] InitialsSensitivity created for observable MLKLa_obs
+2018-12-27 16:16:49.779 - pysb.simulator.cupsoda - INFO - [models.necro] Simulation(s) started
+2018-12-27 16:16:49.825 - pysb.simulator.cupsoda - INFO - [models.necro] Running cupSODA: /usr/local/share/cupSODA/cupSODA /tmp/models_necro_HoJbcK/INPUT 1 /tmp/models_necro_HoJbcK/OUTPUT models_necro 0 0 0 0
+2018-12-27 16:16:57.238 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA reported time: 1.916236 seconds
+2018-12-27 16:16:57.243 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA + I/O time: 7.41805696487 seconds
+2018-12-27 16:22:06.704 - pysb - INFO - Logging started on PySB version 0.1.11+728.g3f65185.dirty
+2018-12-27 16:22:06.704 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-27 16:22:27.458 - pysb - INFO - Logging started on PySB version 0.1.11+728.g3f65185.dirty
+2018-12-27 16:22:27.458 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2018-12-27 16:22:27.467 - pysb.bng - INFO - [models.necro] Generating reaction network
+2018-12-27 16:22:27.871 - pysb.simulator.scipyode - WARNING - [models.necro] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2018-12-27 16:22:27.921 - pysb.tools.sensitivity_analysis - INFO - [models.necro] InitialsSensitivity created for observable MLKLa_obs
+2018-12-27 16:22:32.539 - pysb.simulator.cupsoda - INFO - [models.necro] Simulation(s) started
+2018-12-27 16:22:32.586 - pysb.simulator.cupsoda - INFO - [models.necro] Running cupSODA: /usr/local/share/cupSODA/cupSODA /tmp/models_necro_RkSTM2/INPUT 1 /tmp/models_necro_RkSTM2/OUTPUT models_necro 0 0 0 0
+2018-12-27 16:22:33.072 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA reported time: 0.266509 seconds
+2018-12-27 16:22:33.077 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA + I/O time: 0.490860939026 seconds

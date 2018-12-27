@@ -3,7 +3,7 @@ import sys
 sys.path.append('C:\Users\James Pino\PycharmProjects\pysb')
 import numpy as np
 import scipy.interpolate
-from models.earm_lopez_embedded_flat import model
+from models.necro import model
 from pysb.simulator.scipyode import ScipyOdeSimulator
 from pysb.simulator.cupsoda import CupSodaSimulator
 from pysb.util import update_param_vals, load_params
@@ -14,6 +14,49 @@ setup_logger(logging.INFO, file_output='necro.log', console_output=True)
 
 tspan = np.linspace(0, 480, 481)
 observable = 'MLKLa_obs'
+
+#make an array for each of the kd made up data for mlklp
+#switching at 5 hours
+wtx = np.array([0.,   1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.,  10., 11.,  12.])
+wty = np.array([0., 0., 0., 0.10, 0.25, 0.5, 0.75, 1., 1., 1., 1., 1.,1.])
+
+#A20 data switching at 3 hours
+a20x = np.array([0.,   1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.,  10., 11.,  12.])
+a20y = np.array([0.,0., 0.2, 0.5, 0.75, 1., 1., 1., 1., 1., 1., 1., 1.])
+
+#Tradd data switching at 5
+tdx = np.array([0.,   1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.,  10., 11.,  12.])
+tdy = np.array([0., 0., 0., 0.10, 0.25, 0.5, 0.75, 1., 1., 1., 1., 1.,1.])
+
+#Fadd Data switching at 4 hours
+fdx = np.array([0.,   1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.,  10., 11.,  12.])
+fdy = np.array([0., 0., 0.10,0.25, 0.5, 0.75, 1., 1., 1., 1., 1., 1., 1.])
+
+#C8 Data switching at 4
+c8x = np.array([0.,   1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.,  10., 11.,  12.])
+c8y = np.array([0., 0., 0.10,0.25, 0.5, 0.75, 1., 1., 1., 1., 1., 1.,1.])
+
+#data = collections.OrderedDict([('wt', wty), ('a20', a20y), ('td', tdy),('fd', fdy), ('c8', c8y)])
+# data = collections.OrderedDict([('wt', wty), ('fd', fdy)])
+# data = collections.OrderedDict()
+# data = {'wt': wty, 'a20': a20y, 'td': tdy, 'fd': fdy, 'c8': c8y}
+# data = collections.OrderedDict(sorted(data.items(), key = lambda t:t[1]))
+
+
+ydata_norm = wty
+
+rate_params = model.parameters_rules()
+# print(len(rate_params))
+param_values = np.array([p.value for p in model.parameters])
+# print(len(param_values))
+rate_mask = np.array([p in rate_params for p in model.parameters])
+# print(len(rate_mask))
+# quit()
+
+original_values = np.array([p.value for p in model.parameters])
+
+# We search in log10 space for the parameters
+log10_original_values = np.log10(original_values[rate_mask])
 
 def likelihood(params):
     # print('obj function')
