@@ -10,7 +10,7 @@ from pysb.util import update_param_vals, load_params
 from pysb.tools.sensitivity_analysis import InitialsSensitivity
 import logging
 from pysb.logging import setup_logger
-setup_logger(logging.INFO, file_output='necro.log', console_output=True)
+setup_logger(logging.INFO, file_output='necro.log', console_output=False)
 
 tspan = np.linspace(0, 720, 13)
 observable = 'MLKLa_obs'
@@ -20,7 +20,7 @@ def normalize(trajectories):
     ymin = trajectories.min(0)
     ymax = trajectories.max(0)
     return (trajectories - ymin) / (ymax - ymin)
-#
+
 # t = np.linspace(0, 720, 13)
 # solver1 = ScipyOdeSimulator(model, tspan=t)
 
@@ -73,11 +73,12 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            cupsoda_solver,
-            #scipy_solver,
+            #cupsoda_solver,
+            scipy_solver,
             values_to_sample=vals,
             observable=observable,
             objective_function=likelihood)
+    # print(sens)
 
     sens.run(save_name=savename, out_dir=directory)
 
@@ -93,8 +94,8 @@ def run():
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
-    sens = InitialsSensitivity(cupsoda_solver,
-                               #scipy_solver,
+    sens = InitialsSensitivity(#cupsoda_solver,
+                               scipy_solver,
                                values_to_sample=vals,
                                observable=observable,
                                objective_function=likelihood)
