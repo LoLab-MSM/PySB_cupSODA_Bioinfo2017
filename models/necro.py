@@ -191,3 +191,9 @@ Rule('catalyze_RIP1po4MLKLunmod_to_RIP1po4_MLKLactive', RIP1(bscf = None, bub1 =
 
 
 Observable('MLKLa_obs', MLKL(bRHIM=None, state='active'))
+
+generate_equations(model)
+# t = np.linspace(0, 720, 13)
+# solver1 = ScipyOdeSimulator(model, tspan=t)
+# result = solver1.run()
+# print(result.observables['MLKLa_obs'][:])
