@@ -10,7 +10,7 @@ from pysb.util import update_param_vals, load_params
 from pysb.tools.sensitivity_analysis import InitialsSensitivity
 import logging
 from pysb.logging import setup_logger
-setup_logger(logging.INFO, file_output='necro.log', console_output=False)
+setup_logger(logging.INFO, file_output='necro.log', console_output=True)
 
 tspan = np.linspace(0, 720, 13)
 observable = 'MLKLa_obs'
