@@ -73,11 +73,11 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            cupsoda_solver,
-            #scipy_solver,
+            #cupsoda_solver,
+            scipy_solver,
             values_to_sample=vals,
             observable=observable,
-            objective_function=likelihood, sens_type='params')
+            objective_function=likelihood)
     # print(sens)
 
     sens.run(save_name=savename, out_dir=directory)
@@ -94,11 +94,11 @@ def run():
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
-    sens = InitialsSensitivity(cupsoda_solver,
-                               #scipy_solver,
+    sens = InitialsSensitivity(#cupsoda_solver,
+                               scipy_solver,
                                values_to_sample=vals,
                                observable=observable,
-                               objective_function=likelihood, sens_type='params')
+                               objective_function=likelihood)
 
     sens.run(save_name=savename, out_dir=directory)
     sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_2')
