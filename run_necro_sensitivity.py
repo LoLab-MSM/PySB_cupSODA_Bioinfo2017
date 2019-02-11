@@ -73,8 +73,8 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            #cupsoda_solver,
-            scipy_solver,
+            cupsoda_solver,
+            #scipy_solver,
             values_to_sample=vals,
             observable=observable,
             objective_function=likelihood)
@@ -94,8 +94,8 @@ def run():
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
-    sens = InitialsSensitivity(#cupsoda_solver,
-                               scipy_solver,
+    sens = InitialsSensitivity(cupsoda_solver,
+                               #scipy_solver,
                                values_to_sample=vals,
                                observable=observable,
                                objective_function=likelihood)
