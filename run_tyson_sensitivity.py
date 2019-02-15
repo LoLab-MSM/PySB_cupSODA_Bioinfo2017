@@ -1,7 +1,7 @@
 import numpy as np
 from pysb.simulator.scipyode import ScipyOdeSimulator
 from pysb.simulator.cupsoda import CupSodaSimulator
-from pysb.tools.sensitivity_analysisnew import InitialsSensitivity
+from pysb.tools.sensitivity_analysis4 import InitialsSensitivity
 from models.tyson_oscillator_in_situ import model
 import logging
 from pysb.logging import setup_logger
