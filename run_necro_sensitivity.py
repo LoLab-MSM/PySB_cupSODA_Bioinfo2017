@@ -7,7 +7,7 @@ from models.necro import model
 from pysb.simulator.scipyode import ScipyOdeSimulator
 from pysb.simulator.cupsoda import CupSodaSimulator
 from pysb.util import update_param_vals, load_params
-from pysb.tools.sensitivity_analysis import InitialsSensitivity
+from pysb.tools.sensitivity_analysis4 import InitialsSensitivity
 import logging
 from pysb.logging import setup_logger
 setup_logger(logging.INFO, file_output='necro.log', console_output=True)
