@@ -62,27 +62,27 @@ def run():
     integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'max_steps': 20000, 'memory_usage':'global','vol':vol}
     integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
 
-    new_params1 = load_params(os.path.join('Params',
-                                          'necro_uncal_param.txt'))
-    savename = 'local_necro_parameters_1'
-    update_param_vals(model, new_params1)
+ #   new_params1 = load_params(os.path.join('Params',
+ #                                         'necro_uncal_param.txt'))
+#    savename = 'local_necro_parameters_1'
+#    update_param_vals(model, new_params1)
 
-    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0, integrator_options=integrator_opt)
+#    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0, integrator_options=integrator_opt)
 
-    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
-                                     integrator_options=integrator_opt_scipy)
+#    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
+#                                     integrator_options=integrator_opt_scipy)
 
-    sens = InitialsSensitivity(
-            #cupsoda_solver,
-            scipy_solver,
-            values_to_sample=vals,
-            observable=observable,
-            objective_function=likelihood, sens_type = 'initials')
+#    sens = InitialsSensitivity(
+#            #cupsoda_solver,
+#            scipy_solver,
+#            values_to_sample=vals,
+#            observable=observable,
+#            objective_function=likelihood, sens_type = 'initials')
     # print(sens)
 
-    sens.run(save_name=savename, out_dir=directory)
+#    sens.run(save_name=savename, out_dir=directory)#
 
-    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_1')
+#    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_1_uncal')
 
     new_params2 = load_params(os.path.join('Params',
                                           'necro_cal_param.txt'))
@@ -102,7 +102,7 @@ def run():
                                objective_function=likelihood, sens_type = 'initials')
 
     sens.run(save_name=savename, out_dir=directory)
-    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_2')
+    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_2_cal')
 
 if __name__ == '__main__':
     run()
