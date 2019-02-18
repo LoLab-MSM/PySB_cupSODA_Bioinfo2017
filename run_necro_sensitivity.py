@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.append('C:\Users\James Pino\PycharmProjects\pysb')
+#sys.path.append('C:\Users\James Pino\PycharmProjects\pysb')
 import numpy as np
 import scipy.interpolate
 from models.necro import model
@@ -73,11 +73,11 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-#            #cupsoda_solver,
+            #cupsoda_solver,
             scipy_solver,
             values_to_sample=vals,
             observable=observable,
-            objective_function=likelihood, sens_type = 'params')
+            objective_function=likelihood, sens_type = 'initials')
     # print(sens)
 
     sens.run(save_name=savename, out_dir=directory)#
@@ -95,11 +95,12 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
 
-    sens = InitialsSensitivity(#cupsoda_solver,
+    sens = InitialsSensitivity(
+				#cupsoda_solver,
                                scipy_solver,
                                values_to_sample=vals,
                                observable=observable,
-                               objective_function=likelihood, sens_type = 'params')
+                               objective_function=likelihood, sens_type = 'initials')
 
     sens.run(save_name=savename, out_dir=directory)
     sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_2_cal')

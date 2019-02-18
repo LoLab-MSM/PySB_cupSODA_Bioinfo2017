@@ -23806,3 +23806,16 @@
 2019-02-18 00:10:56.510 - pysb.simulator.scipyode - INFO - [models.tyson_oscillator_in_situ] Running simulation 440 of 441
 2019-02-18 00:10:56.544 - pysb.simulator.scipyode - INFO - [models.tyson_oscillator_in_situ] Running simulation 441 of 441
 2019-02-18 00:10:56.585 - pysb.simulator.scipyode - INFO - [models.tyson_oscillator_in_situ] All simulation(s) complete
+2019-02-18 00:18:05.000 - pysb - INFO - Logging started on PySB version 1.7.0+29.gfa66d69
+2019-02-18 00:18:05.000 - pysb - INFO - Log entry time offset from UTC: 0.00 hours
+2019-02-18 00:18:05.007 - pysb.bng - INFO - [models.tyson_oscillator_in_situ] Generating reaction network
+2019-02-18 00:18:05.178 - pysb.simulator.scipyode - WARNING - [models.tyson_oscillator_in_situ] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2019-02-18 00:18:05.187 - pysb.tools.sensitivity_analysis4 - INFO - [models.tyson_oscillator_in_situ] InitialsSensitivity created for observable Y3
+2019-02-18 00:18:05.371 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Simulation(s) started
+2019-02-18 00:18:05.377 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Running cupSODA: /home/ildefog/miniconda3/envs/calibration/bin/cupSODA /tmp/models_tyson_oscillator_in_situ_2wVkyJ/INPUT 1 /tmp/models_tyson_oscillator_in_situ_2wVkyJ/OUTPUT models_tyson_oscillator_in_situ 0 0 0 0
+2019-02-18 00:18:06.554 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA reported time: 0.417570 seconds
+2019-02-18 00:18:06.564 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA + I/O time: 1.18631196022 seconds
+2019-02-18 00:18:06.572 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Simulation(s) started
+2019-02-18 00:18:06.608 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] Running cupSODA: /home/ildefog/miniconda3/envs/calibration/bin/cupSODA /tmp/models_tyson_oscillator_in_situ_gJE56E/INPUT 1 /tmp/models_tyson_oscillator_in_situ_gJE56E/OUTPUT models_tyson_oscillator_in_situ 0 0 0 0
+2019-02-18 00:18:12.489 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA reported time: 0.038345 seconds
+2019-02-18 00:18:15.277 - pysb.simulator.cupsoda - INFO - [models.tyson_oscillator_in_situ] cupSODA + I/O time: 8.66873502731 seconds
