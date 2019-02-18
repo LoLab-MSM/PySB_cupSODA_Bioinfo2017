@@ -1,11 +1,13 @@
 import numpy as np
 from pysb.simulator.scipyode import ScipyOdeSimulator
 from pysb.simulator.cupsoda import CupSodaSimulator
-from pysb.tools.sensitivity_analysis import InitialsSensitivity
+from pysb.tools.sensitivity_analysis4 import InitialsSensitivity
 from models.tyson_oscillator_in_situ import model
 import logging
 from pysb.logging import setup_logger
 setup_logger(logging.INFO, file_output='tyson_run.log', console_output=True)
+import matplotlib
+matplotlib.use('Agg')
 
 def run():
     # simulation time
@@ -38,23 +40,22 @@ def run():
     directory = 'SensitivityData'
     integrator_opt = {'rtol': 1e-6, 'atol': 1e-6, 'mxsteps': 20000}
     integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
-    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
-                                      memory_usage='sharedconstant', vol=vol,
-                                      integrator_options=integrator_opt)
+    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=1)
+                                    # integrator_options=integrator_opt, memory_usage = 'sharedconstant', vol=vol)
 
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            cupsoda_solver,
-            # scipy_solver,
+            #cupsoda_solver,
+           scipy_solver,
             values_to_sample=vals,
             observable=observable,
-            objective_function=obj_func_cell_cycle)
+            objective_function=obj_func_cell_cycle, sens_type='initials')
 
     sens.run(save_name=savename, out_dir=directory)
 
-    sens.create_boxplot_and_heatplot(save_name='tyson_sens', show=True)
+    sens.create_boxplot_and_heatplot(save_name='tyson_sens')
     sens.create_individual_pairwise_plots(save_name='tyson_pairwise')
     sens.create_plot_p_h_pprime('tyson_phprime')
 
