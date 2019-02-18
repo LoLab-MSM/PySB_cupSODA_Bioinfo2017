@@ -1,4 +1,4 @@
-antlr-python-runtime==3.1.2
+#antlr-python-runtime==3.1.2
 backports.functools-lru-cache==1.4
 cycler==0.10.0
 deap==1.2.2
@@ -16,7 +16,7 @@ pandas==0.21.0
 pathos==0.2.1
 pox==0.2.3
 ppft==1.6.4.7.1
-pyfuzzy==0.1.0
+#pyfuzzy==0.1.0
 pyparsing==2.2.0
 pysb==1.5.0
 python-dateutil==2.6.1

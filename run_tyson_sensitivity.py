@@ -6,6 +6,8 @@ from models.tyson_oscillator_in_situ import model
 import logging
 from pysb.logging import setup_logger
 setup_logger(logging.INFO, file_output='tyson_run.log', console_output=True)
+import matplotlib
+matplotlib.use('Agg')
 
 def run():
     # simulation time
@@ -49,7 +51,7 @@ def run():
             scipy_solver,
             values_to_sample=vals,
             observable=observable,
-            objective_function=obj_func_cell_cycle, sens_type='params')
+            objective_function=obj_func_cell_cycle, sens_type='initials')
 
     sens.run(save_name=savename, out_dir=directory)
 
