@@ -47,8 +47,8 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            #cupsoda_solver,
-           scipy_solver,
+            cupsoda_solver,
+          # scipy_solver,
             values_to_sample=vals,
             observable=observable,
             objective_function=obj_func_cell_cycle, sens_type='initials')
