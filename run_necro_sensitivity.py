@@ -63,7 +63,7 @@ def run():
     integrator_opt_scipy = {'rtol': 1e-6, 'atol': 1e-6, 'mxstep': 20000}
 
     new_params1 = load_params(os.path.join('Params',
-                                          'necro_cal_param.txt'))
+                                          'params_necro_new_uncal.txt'))
     savename = 'local_necro_parameters_1'
     update_param_vals(model, new_params1)
 
@@ -82,28 +82,28 @@ def run():
 
     sens.run(save_name=savename, out_dir=directory)#
 
-    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_1_cal')
+    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_1_uncal')
 
-#    new_params2 = load_params(os.path.join('Params',
- #                                         'necro_cal_param.txt'))
-  #  savename = 'local_necro_parameters_2'
-   # update_param_vals(model, new_params2)
-    #cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
-     #                                 #memory_usage='sharedconstant', vol=vol,
-     #                                 integrator_options=integrator_opt)
-#    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
-#                                     integrator_options=integrator_opt_scipy)#
-##
+    new_params2 = load_params(os.path.join('Params',
+                                         'params_necro_new_cal.txt'))
+    savename = 'local_necro_parameters_2'
+    update_param_vals(model, new_params2)
+    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
+                                     #memory_usage='sharedconstant', vol=vol,
+                                     integrator_options=integrator_opt)
+    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
+                                    integrator_options=integrator_opt_scipy)#
 #
-#    sens = InitialsSensitivity(
-#				#cupsoda_solver,
-#                               scipy_solver,
-#                               values_to_sample=vals,
-#                               observable=observable,
-#                               objective_function=likelihood, sens_type = 'initials')#
 
-#    sens.run(save_name=savename, out_dir=directory)
- #   sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_2_cal')
+    sens = InitialsSensitivity(
+                #cupsoda_solver,
+                              scipy_solver,
+                              values_to_sample=vals,
+                              observable=observable,
+                              objective_function=likelihood, sens_type = 'initials')#
+
+    sens.run(save_name=savename, out_dir=directory)
+    sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_2_cal')
 
 if __name__ == '__main__':
     run()
