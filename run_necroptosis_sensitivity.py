@@ -85,7 +85,7 @@ def run():
     # sens.create_boxplot_and_heatplot(save_name='necro_sensitivity_set_1_uncal')
 
     new_params2 = load_params(os.path.join('Params',
-                                         'params_cal.txt'))
+                                         'params_necro_new_uncal.txt'))
     savename = 'local_necro_parameters_2'
     update_param_vals(model, new_params2)
     # cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
@@ -103,7 +103,7 @@ def run():
                               objective_function=likelihood, sens_type = 'initials')#
 
     sens.run(save_name=savename, out_dir=directory)
-    sens.create_boxplot_and_heatplot(save_name='necro_cal')
+    sens.create_boxplot_and_heatplot(save_name='necro_uncal')
 
 if __name__ == '__main__':
     run()
