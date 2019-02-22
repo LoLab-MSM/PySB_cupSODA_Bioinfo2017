@@ -234,13 +234,13 @@ Rule('catalyze_RIP1po4MLKLunmod_to_RIP1po4_MLKLactive', RIP1(bscf = None, bub1 =
 Observable('MLKLa_obs', MLKL(bRHIM=None, state='active'))
 
 generate_equations(model)
-
 #
+# #
 # t = np.linspace(0, 720, 13)
 # solver1 = ScipyOdeSimulator(model, tspan=t)
 # result = solver1.run(param_values=fstpso)
 # # print(result.observables['MLKLa_obs'][:])
 #
-# with open('params_necro_new_cal.txt', 'w') as f:
+# with open('params_cal.txt', 'w') as f:
 #     for p, v in zip(model.parameters, result.param_values[0]):
 #         f.write('{},{:e}\n'.format(p.name, v))
