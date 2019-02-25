@@ -74,14 +74,14 @@ Parameter('cyc0', 0.25*NA_V)
 # Parameter('cyc0', 0.25)
 Initial(cyclin(Y='U', b=None), cyc0)
 
-tspan = tspan = np.linspace(0, 200, 5001)
-sim = ScipyOdeSimulator(model, tspan=tspan)
-result = sim.run()
-
-# # for p in model.parameters:
-# #     print('{},{:e}'.format(p.name,p.value))
-
-# #
-with open('params_tyson_un.txt', 'w') as f:
-    for p, v in zip(model.parameters, result.param_values[0]):
-        f.write('{},{:e}\n'.format(p.name, v))
+# tspan = tspan = np.linspace(0, 200, 5001)
+# sim = ScipyOdeSimulator(model, tspan=tspan)
+# result = sim.run()
+#
+# # # for p in model.parameters:
+# # #     print('{},{:e}'.format(p.name,p.value))
+#
+# # #
+# with open('params_tyson_un.txt', 'w') as f:
+#     for p, v in zip(model.parameters, result.param_values[0]):
+#         f.write('{},{:e}\n'.format(p.name, v))

@@ -56,6 +56,7 @@ def run():
 
     """
     vals = np.linspace(.8, 1.2, 11)
+    savename = 'local_necro_parameters_2'
     vol = 1e-19
     directory = 'SensitivityData'
 
@@ -86,7 +87,7 @@ def run():
 
     new_params2 = load_params(os.path.join('Params',
                                          'params_necro_new_uncal.txt'))
-    savename = 'local_necro_parameters_2'
+
     update_param_vals(model, new_params2)
     # cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
                                      #memory_usage='sharedconstant', vol=vol,

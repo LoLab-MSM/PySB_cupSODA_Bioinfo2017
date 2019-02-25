@@ -45,9 +45,24 @@ def run():
 
 
     new_params1 = load_params(os.path.join('Params',
-                                          'params_tyson_un.txt'))
-    savename = 'local_necro_parameters_1'
+                                          'params_tyson_mod.txt'))
+    savename = 'local_tyson_parameters_2'
 
+    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
+                                     integrator_options=integrator_opt_scipy)
+
+    sens = InitialsSensitivity(
+            # cupsoda_solver,
+            scipy_solver,
+            values_to_sample=vals,
+            observable=observable,
+            objective_function=obj_func_cell_cycle)
+
+    sens.run(save_name=savename, out_dir=directory)
+
+    sens.create_boxplot_and_heatplot(save_name='tyson_sens_mod', show=True)
+    # sens.create_individual_pairwise_plots(save_name='tyson_pairwise')
+    # sens.create_plot_p_h_pprime('tyson_phprime')
 
 
 
