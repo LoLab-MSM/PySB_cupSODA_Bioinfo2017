@@ -46,7 +46,8 @@ def run():
 
     new_params1 = load_params(os.path.join('Params',
                                           'params_tyson_mod.txt'))
-    savename = 'local_tyson_parameters_2'
+    update_param_vals(model, new_params1)
+    savename = 'local_tyson_parameters_1'
 
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
@@ -56,7 +57,7 @@ def run():
             scipy_solver,
             values_to_sample=vals,
             observable=observable,
-            objective_function=obj_func_cell_cycle)
+            objective_function=obj_func_cell_cycle, sens_type='initials')
 
     sens.run(save_name=savename, out_dir=directory)
 
@@ -64,6 +65,24 @@ def run():
     # sens.create_individual_pairwise_plots(save_name='tyson_pairwise')
     # sens.create_plot_p_h_pprime('tyson_phprime')
 
+
+    new_params2 = load_params(os.path.join('Params',
+                                          'params_tyson_un.txt'))
+    savename = 'local_tyson_parameters_2'
+    update_param_vals(model, new_params2)
+    # cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
+    #                                   #memory_usage='sharedconstant', vol=vol,
+    #                                   integrator_options=integrator_opt)
+    scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
+                                     integrator_options=integrator_opt_scipy)
+
+    sens = InitialsSensitivity(scipy_solver,
+                               values_to_sample=vals,
+                               observable=observable,
+                               objective_function=obj_func_cell_cycle, sens_type='initials')
+
+    sens.run(save_name=savename, out_dir=directory)
+    sens.create_boxplot_and_heatplot(save_name='tyson_sensitivity_set_2')
 
 
 if __name__ == '__main__':

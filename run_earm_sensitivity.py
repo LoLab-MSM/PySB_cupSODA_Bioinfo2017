@@ -1,13 +1,13 @@
 import os
 import sys
-sys.path.append('C:\Users\James Pino\PycharmProjects\pysb')
+# sys.path.append('C:\Users\James Pino\PycharmProjects\pysb')
 import numpy as np
 import scipy.interpolate
 from models.earm_lopez_embedded_flat import model
 from pysb.simulator.scipyode import ScipyOdeSimulator
 from pysb.simulator.cupsoda import CupSodaSimulator
 from pysb.util import update_param_vals, load_params
-from pysb.tools.sensitivity_analysis import InitialsSensitivity
+from pysb.tools.sensitivity_analysis4 import InitialsSensitivity
 import logging
 from pysb.logging import setup_logger
 setup_logger(logging.INFO, file_output='earm.log', console_output=True)
@@ -57,11 +57,11 @@ def run():
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            cupsoda_solver,
-            #scipy_solver,
+            #cupsoda_solver,
+            scipy_solver,
             values_to_sample=vals,
             observable=observable,
-            objective_function=likelihood)
+            objective_function=likelihood, sens_type='initials')
 
     sens.run(save_name=savename, out_dir=directory)
     # p_matrix = np.loadtxt(
@@ -77,16 +77,16 @@ def run():
                                           'earm_parameter_set_two.txt'))
     savename = 'local_earm_parameters_2'
     update_param_vals(model, new_params2)
-    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
-                                      #memory_usage='sharedconstant', vol=vol,
-                                      integrator_options=integrator_opt)
+    # cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0,
+    #                                   #memory_usage='sharedconstant', vol=vol,
+    #                                   integrator_options=integrator_opt)
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(scipy_solver,
                                values_to_sample=vals,
                                observable=observable,
-                               objective_function=likelihood)
+                               objective_function=likelihood, sens_type='initials')
 
     sens.run(save_name=savename, out_dir=directory)
     sens.create_boxplot_and_heatplot(save_name='earm_sensitivity_set_2')

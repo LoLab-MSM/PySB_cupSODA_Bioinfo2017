@@ -1,0 +1,10 @@
+2019-02-26 12:12:58.593 - pysb - INFO - Logging started on PySB version 0.1.11+739.gbaeb68f
+2019-02-26 12:12:58.594 - pysb - INFO - Log entry time offset from UTC: -6.00 hours
+2019-02-26 12:12:58.601 - pysb.simulator.scipyode - WARNING - [models.necro] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2019-02-26 12:12:58.643 - pysb.tools.sensitivity_analysis4 - INFO - [models.necro] InitialsSensitivity created for observable MLKLa_obs
+2019-02-26 12:13:07.341 - pysb.simulator.scipyode - INFO - [models.necro] Simulation(s) started
+2019-02-26 12:13:07.365 - pysb.simulator.scipyode - INFO - [models.necro] Running simulation 1 of 1
+2019-02-26 12:13:07.487 - pysb.simulator.scipyode - INFO - [models.necro] All simulation(s) complete
+2019-02-26 12:13:07.508 - pysb.simulator.scipyode - INFO - [models.necro] Simulation(s) started
+2019-02-26 12:13:14.991 - pysb.simulator.scipyode - INFO - [models.necro] Running simulation 1 of 40131
+2019-02-26 12:13:17.601 - pysb.simulator.scipyode - INFO - [models.necro] Running simulation 2 of 40131
