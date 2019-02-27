@@ -26,3 +26,313 @@
 2019-02-26 18:32:39.219 - pysb.simulator.scipyode - INFO - [models.necro] Simulation(s) started
 2019-02-26 18:32:46.587 - pysb.simulator.scipyode - INFO - [models.necro] Running simulation 1 of 40131
 2019-02-26 18:32:49.144 - pysb.simulator.scipyode - INFO - [models.necro] Running simulation 2 of 40131
+2019-02-27 00:39:09.785 - pysb - INFO - Logging started on PySB version 1.7.0+29.gfa66d69
+2019-02-27 00:39:09.786 - pysb - INFO - Log entry time offset from UTC: -0.00 hours
+2019-02-27 00:39:09.787 - pysb.simulator.cupsoda - DEBUG - [models.necro] Simulator created
+2019-02-27 00:39:09.794 - pysb.simulator.scipyode - WARNING - [models.necro] This system of ODEs will be evaluated in pure Python. This may be slow for large models. We recommend installing a package for compiling the ODEs to C code: 'weave' (recommended for Python 2) or 'cython' (recommended for Python 3). This warning can be suppressed by specifying compiler='python'.
+2019-02-27 00:39:09.827 - pysb.tools.sensitivity_analysis4 - INFO - [models.necro] InitialsSensitivity created for observable MLKLa_obs
+2019-02-27 00:39:18.007 - pysb.simulator.cupsoda - INFO - [models.necro] Simulation(s) started
+2019-02-27 00:39:18.032 - pysb.simulator.cupsoda - DEBUG - [models.necro] Output directory is /tmp/models_necro_q3_73ddp
+2019-02-27 00:39:18.032 - pysb.simulator.cupsoda - DEBUG - [models.necro] Constructing the c_matrix:
+2019-02-27 00:39:18.033 - pysb.simulator.cupsoda - DEBUG - [models.necro] 0%
+2019-02-27 00:39:18.033 - pysb.simulator.cupsoda - DEBUG - [models.necro] 100%
+2019-02-27 00:39:18.040 - pysb.simulator.cupsoda - DEBUG - [models.necro] n_blocks set to 1 (used pycuda: False)
+2019-02-27 00:39:18.041 - pysb.simulator.cupsoda - INFO - [models.necro] Running cupSODA: /home/ildefog/miniconda3/envs/calibration/bin/cupSODA /tmp/models_necro_q3_73ddp/INPUT 1 /tmp/models_necro_q3_73ddp/OUTPUT models_necro 0 0 0 1
+2019-02-27 00:39:18.646 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA reported time: 0.311676 seconds
+2019-02-27 00:39:18.646 - pysb.simulator.cupsoda - DEBUG - [models.necro] cupSODA stdout:
+ * Deterministic model detected
+ * Detected 36 species
+ * Detected 37 reactions
+ * Left, right and var matrices loaded
+ * 1 threads necessary (according to c_matrix)
+ * Will launch 1 threads on 1 blocks
+ * Kinetic constants for 1 threads loaded
+ * time_max set to 720.000000
+ * Conversion constant (POST): 0.000000e+00
+0) -1.0 0.0 1.0 2.0 0.0 1.0 -1.0 1.0 1.0 1.0 0.0 1.0 2.0 1.0 1.0 14.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+1) -1.0 0.0 1.0 2.0 0.0 1.0 1.0 2.0 1.0 1.0 14.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+2) -1.0 3.0 1.0 2.0 2.0 14.0 1.0 4.0 1.0 1.0 15.0 1.0 27.0 1.0 1.0 26.0 1.0 32.0 1.0 1.0 29.0 
+3) -1.0 5.0 1.0 2.0 3.0 15.0 1.0 6.0 1.0 1.0 16.0 
+4) -1.0 7.0 1.0 2.0 4.0 16.0 1.0 8.0 1.0 1.0 17.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+5) -1.0 9.0 1.0 2.0 5.0 17.0 1.0 10.0 1.0 1.0 18.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+6) -1.0 34.0 1.0 2.0 6.0 33.0 1.0 35.0 1.0 1.0 34.0 
+7) -1.0 14.0 1.0 2.0 7.0 20.0 1.0 16.0 1.0 1.0 21.0 1.0 17.0 1.0 1.0 21.0 
+8) -1.0 15.0 1.0 2.0 8.0 20.0 1.0 18.0 1.0 1.0 22.0 1.0 19.0 1.0 1.0 22.0 
+9) -1.0 20.0 1.0 2.0 9.0 23.0 1.0 21.0 1.0 1.0 24.0 1.0 27.0 1.0 1.0 26.0 1.0 32.0 1.0 1.0 29.0 
+10) -1.0 23.0 1.0 2.0 10.0 24.0 1.0 26.0 1.0 1.0 26.0 
+11) -1.0 25.0 1.0 2.0 11.0 25.0 1.0 28.0 1.0 1.0 27.0 
+12) -1.0 12.0 1.0 2.0 12.0 19.0 1.0 13.0 1.0 1.0 20.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+13) -1.0 22.0 1.0 2.0 13.0 24.0 1.0 24.0 1.0 1.0 25.0 1.0 32.0 1.0 1.0 29.0 
+14) 1.0 0.0 1.0 2.0 0.0 1.0 -1.0 2.0 1.0 1.0 14.0 -1.0 3.0 1.0 2.0 2.0 14.0 1.0 4.0 1.0 1.0 15.0 
+15) 1.0 3.0 1.0 2.0 2.0 14.0 -1.0 4.0 1.0 1.0 15.0 -1.0 5.0 1.0 2.0 3.0 15.0 1.0 6.0 1.0 1.0 16.0 
+16) 1.0 5.0 1.0 2.0 3.0 15.0 -1.0 6.0 1.0 1.0 16.0 -1.0 7.0 1.0 2.0 4.0 16.0 1.0 8.0 1.0 1.0 17.0 
+17) 1.0 7.0 1.0 2.0 4.0 16.0 -1.0 8.0 1.0 1.0 17.0 -1.0 9.0 1.0 2.0 5.0 17.0 1.0 10.0 1.0 1.0 18.0 
+18) 1.0 9.0 1.0 2.0 5.0 17.0 -1.0 10.0 1.0 1.0 18.0 -1.0 11.0 1.0 1.0 18.0 
+19) 1.0 11.0 1.0 1.0 18.0 -1.0 12.0 1.0 2.0 12.0 19.0 1.0 13.0 1.0 1.0 20.0 
+20) 1.0 12.0 1.0 2.0 12.0 19.0 -1.0 13.0 1.0 1.0 20.0 -1.0 14.0 1.0 2.0 7.0 20.0 -1.0 15.0 1.0 2.0 8.0 20.0 1.0 16.0 1.0 1.0 21.0 1.0 18.0 1.0 1.0 22.0 
+21) 1.0 14.0 1.0 2.0 7.0 20.0 -1.0 16.0 1.0 1.0 21.0 -1.0 17.0 1.0 1.0 21.0 
+22) 1.0 15.0 1.0 2.0 8.0 20.0 -1.0 18.0 1.0 1.0 22.0 -1.0 19.0 1.0 1.0 22.0 
+23) 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 -1.0 20.0 1.0 2.0 9.0 23.0 1.0 21.0 1.0 1.0 24.0 
+24) 1.0 20.0 1.0 2.0 9.0 23.0 -1.0 21.0 1.0 1.0 24.0 -1.0 22.0 1.0 2.0 13.0 24.0 -1.0 23.0 1.0 2.0 10.0 24.0 1.0 24.0 1.0 1.0 25.0 1.0 26.0 1.0 1.0 26.0 
+25) 1.0 22.0 1.0 2.0 13.0 24.0 -1.0 24.0 1.0 1.0 25.0 -1.0 25.0 1.0 2.0 11.0 25.0 1.0 28.0 1.0 1.0 27.0 
+26) 1.0 23.0 1.0 2.0 10.0 24.0 -1.0 26.0 1.0 1.0 26.0 -1.0 27.0 1.0 1.0 26.0 
+27) 1.0 25.0 1.0 2.0 11.0 25.0 -1.0 28.0 1.0 1.0 27.0 -1.0 29.0 1.0 1.0 27.0 1.0 31.0 1.0 1.0 29.0 
+28) 1.0 27.0 1.0 1.0 26.0 -1.0 30.0 1.0 1.0 28.0 
+29) 1.0 29.0 1.0 1.0 27.0 -1.0 31.0 1.0 1.0 29.0 -1.0 32.0 1.0 1.0 29.0 
+30) 1.0 30.0 1.0 1.0 28.0 -1.0 33.0 1.0 1.0 30.0 
+31) 1.0 32.0 1.0 1.0 29.0 
+32) 1.0 32.0 1.0 1.0 29.0 
+33) 1.0 33.0 1.0 1.0 30.0 -1.0 34.0 1.0 2.0 6.0 33.0 1.0 35.0 1.0 1.0 34.0 1.0 36.0 1.0 1.0 34.0 
+34) 1.0 34.0 1.0 2.0 6.0 33.0 -1.0 35.0 1.0 1.0 34.0 -1.0 36.0 1.0 1.0 34.0 
+35) 1.0 36.0 1.0 1.0 34.0 
+ * DUMP ODE
+dX[0]/dt =  -1  * k[0]  * 1.000000  * X[0]  * X[1]  -1  * k[1]  * 1.000000  * X[0] + 1  * k[2]  * 1.000000  * X[14] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[1]/dt =  -1  * k[0]  * 1.000000  * X[0]  * X[1] + 1  * k[2]  * 1.000000  * X[14] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[2]/dt =  -1  * k[3]  * 1.000000  * X[2]  * X[14] + 1  * k[4]  * 1.000000  * X[15] + 1  * k[27]  * 1.000000  * X[26] + 1  * k[32]  * 1.000000  * X[29] 
+dX[3]/dt =  -1  * k[5]  * 1.000000  * X[3]  * X[15] + 1  * k[6]  * 1.000000  * X[16] 
+dX[4]/dt =  -1  * k[7]  * 1.000000  * X[4]  * X[16] + 1  * k[8]  * 1.000000  * X[17] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[5]/dt =  -1  * k[9]  * 1.000000  * X[5]  * X[17] + 1  * k[10]  * 1.000000  * X[18] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[6]/dt =  -1  * k[34]  * 1.000000  * X[6]  * X[33] + 1  * k[35]  * 1.000000  * X[34] 
+dX[7]/dt =  -1  * k[14]  * 1.000000  * X[7]  * X[20] + 1  * k[16]  * 1.000000  * X[21] + 1  * k[17]  * 1.000000  * X[21] 
+dX[8]/dt =  -1  * k[15]  * 1.000000  * X[8]  * X[20] + 1  * k[18]  * 1.000000  * X[22] + 1  * k[19]  * 1.000000  * X[22] 
+dX[9]/dt =  -1  * k[20]  * 1.000000  * X[9]  * X[23] + 1  * k[21]  * 1.000000  * X[24] + 1  * k[27]  * 1.000000  * X[26] + 1  * k[32]  * 1.000000  * X[29] 
+dX[10]/dt =  -1  * k[23]  * 1.000000  * X[10]  * X[24] + 1  * k[26]  * 1.000000  * X[26] 
+dX[11]/dt =  -1  * k[25]  * 1.000000  * X[11]  * X[25] + 1  * k[28]  * 1.000000  * X[27] 
+dX[12]/dt =  -1  * k[12]  * 1.000000  * X[12]  * X[19] + 1  * k[13]  * 1.000000  * X[20] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[13]/dt =  -1  * k[22]  * 1.000000  * X[13]  * X[24] + 1  * k[24]  * 1.000000  * X[25] + 1  * k[32]  * 1.000000  * X[29] 
+dX[14]/dt = + 1  * k[0]  * 1.000000  * X[0]  * X[1]  -1  * k[2]  * 1.000000  * X[14]  -1  * k[3]  * 1.000000  * X[2]  * X[14] + 1  * k[4]  * 1.000000  * X[15] 
+dX[15]/dt = + 1  * k[3]  * 1.000000  * X[2]  * X[14]  -1  * k[4]  * 1.000000  * X[15]  -1  * k[5]  * 1.000000  * X[3]  * X[15] + 1  * k[6]  * 1.000000  * X[16] 
+dX[16]/dt = + 1  * k[5]  * 1.000000  * X[3]  * X[15]  -1  * k[6]  * 1.000000  * X[16]  -1  * k[7]  * 1.000000  * X[4]  * X[16] + 1  * k[8]  * 1.000000  * X[17] 
+dX[17]/dt = + 1  * k[7]  * 1.000000  * X[4]  * X[16]  -1  * k[8]  * 1.000000  * X[17]  -1  * k[9]  * 1.000000  * X[5]  * X[17] + 1  * k[10]  * 1.000000  * X[18] 
+dX[18]/dt = + 1  * k[9]  * 1.000000  * X[5]  * X[17]  -1  * k[10]  * 1.000000  * X[18]  -1  * k[11]  * 1.000000  * X[18] 
+dX[19]/dt = + 1  * k[11]  * 1.000000  * X[18]  -1  * k[12]  * 1.000000  * X[12]  * X[19] + 1  * k[13]  * 1.000000  * X[20] 
+dX[20]/dt = + 1  * k[12]  * 1.000000  * X[12]  * X[19]  -1  * k[13]  * 1.000000  * X[20]  -1  * k[14]  * 1.000000  * X[7]  * X[20]  -1  * k[15]  * 1.000000  * X[8]  * X[20] + 1  * k[16]  * 1.000000  * X[21] + 1  * k[18]  * 1.000000  * X[22] 
+dX[21]/dt = + 1  * k[14]  * 1.000000  * X[7]  * X[20]  -1  * k[16]  * 1.000000  * X[21]  -1  * k[17]  * 1.000000  * X[21] 
+dX[22]/dt = + 1  * k[15]  * 1.000000  * X[8]  * X[20]  -1  * k[18]  * 1.000000  * X[22]  -1  * k[19]  * 1.000000  * X[22] 
+dX[23]/dt = + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22]  -1  * k[20]  * 1.000000  * X[9]  * X[23] + 1  * k[21]  * 1.000000  * X[24] 
+dX[24]/dt = + 1  * k[20]  * 1.000000  * X[9]  * X[23]  -1  * k[21]  * 1.000000  * X[24]  -1  * k[22]  * 1.000000  * X[13]  * X[24]  -1  * k[23]  * 1.000000  * X[10]  * X[24] + 1  * k[24]  * 1.000000  * X[25] + 1  * k[26]  * 1.000000  * X[26] 
+dX[25]/dt = + 1  * k[22]  * 1.000000  * X[13]  * X[24]  -1  * k[24]  * 1.000000  * X[25]  -1  * k[25]  * 1.000000  * X[11]  * X[25] + 1  * k[28]  * 1.000000  * X[27] 
+dX[26]/dt = + 1  * k[23]  * 1.000000  * X[10]  * X[24]  -1  * k[26]  * 1.000000  * X[26]  -1  * k[27]  * 1.000000  * X[26] 
+dX[27]/dt = + 1  * k[25]  * 1.000000  * X[11]  * X[25]  -1  * k[28]  * 1.000000  * X[27]  -1  * k[29]  * 1.000000  * X[27] + 1  * k[31]  * 1.000000  * X[29] 
+dX[28]/dt = + 1  * k[27]  * 1.000000  * X[26]  -1  * k[30]  * 1.000000  * X[28] 
+dX[29]/dt = + 1  * k[29]  * 1.000000  * X[27]  -1  * k[31]  * 1.000000  * X[29]  -1  * k[32]  * 1.000000  * X[29] 
+dX[30]/dt = + 1  * k[30]  * 1.000000  * X[28]  -1  * k[33]  * 1.000000  * X[30] 
+dX[31]/dt = + 1  * k[32]  * 1.000000  * X[29] 
+dX[32]/dt = + 1  * k[32]  * 1.000000  * X[29] 
+dX[33]/dt = + 1  * k[33]  * 1.000000  * X[30]  -1  * k[34]  * 1.000000  * X[6]  * X[33] + 1  * k[35]  * 1.000000  * X[34] + 1  * k[36]  * 1.000000  * X[34] 
+dX[34]/dt = + 1  * k[34]  * 1.000000  * X[6]  * X[33]  -1  * k[35]  * 1.000000  * X[34]  -1  * k[36]  * 1.000000  * X[34] 
+dX[35]/dt = + 1  * k[36]  * 1.000000  * X[34] 
+ * Will sample 1 species
+ * Will store 13 samples 
+ * ATOL vector created
+ * RTOL set to 1.000000e-06
+ * max integration steps set to 20000
+ * All files correct
+ * Fitness calculation: DISABLED 
+Running time: 0.311676 seconds
+
+2019-02-27 00:39:18.651 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA + I/O time: 0.6103312969207764 seconds
+2019-02-27 00:39:18.651 - pysb.simulator.cupsoda - DEBUG - [models.necro] SimulationResult constructor started
+2019-02-27 00:39:18.673 - pysb.simulator.cupsoda - DEBUG - [models.necro] SimulationResult constructor finished
+2019-02-27 00:39:18.673 - pysb.simulator.cupsoda - INFO - [models.necro] Simulation(s) started
+2019-02-27 00:39:25.817 - pysb.simulator.cupsoda - DEBUG - [models.necro] Output directory is /tmp/models_necro__dlko9sm
+2019-02-27 00:39:25.817 - pysb.simulator.cupsoda - DEBUG - [models.necro] Constructing the c_matrix:
+2019-02-27 00:39:25.823 - pysb.simulator.cupsoda - DEBUG - [models.necro] 0%
+2019-02-27 00:39:25.848 - pysb.simulator.cupsoda - DEBUG - [models.necro] 1%
+2019-02-27 00:39:25.873 - pysb.simulator.cupsoda - DEBUG - [models.necro] 2%
+2019-02-27 00:39:25.899 - pysb.simulator.cupsoda - DEBUG - [models.necro] 3%
+2019-02-27 00:39:25.924 - pysb.simulator.cupsoda - DEBUG - [models.necro] 4%
+2019-02-27 00:39:25.951 - pysb.simulator.cupsoda - DEBUG - [models.necro] 5%
+2019-02-27 00:39:25.976 - pysb.simulator.cupsoda - DEBUG - [models.necro] 6%
+2019-02-27 00:39:26.002 - pysb.simulator.cupsoda - DEBUG - [models.necro] 7%
+2019-02-27 00:39:26.027 - pysb.simulator.cupsoda - DEBUG - [models.necro] 8%
+2019-02-27 00:39:26.053 - pysb.simulator.cupsoda - DEBUG - [models.necro] 9%
+2019-02-27 00:39:26.078 - pysb.simulator.cupsoda - DEBUG - [models.necro] 10%
+2019-02-27 00:39:26.104 - pysb.simulator.cupsoda - DEBUG - [models.necro] 11%
+2019-02-27 00:39:26.130 - pysb.simulator.cupsoda - DEBUG - [models.necro] 12%
+2019-02-27 00:39:26.155 - pysb.simulator.cupsoda - DEBUG - [models.necro] 13%
+2019-02-27 00:39:26.181 - pysb.simulator.cupsoda - DEBUG - [models.necro] 14%
+2019-02-27 00:39:26.206 - pysb.simulator.cupsoda - DEBUG - [models.necro] 15%
+2019-02-27 00:39:26.232 - pysb.simulator.cupsoda - DEBUG - [models.necro] 16%
+2019-02-27 00:39:26.258 - pysb.simulator.cupsoda - DEBUG - [models.necro] 17%
+2019-02-27 00:39:26.282 - pysb.simulator.cupsoda - DEBUG - [models.necro] 18%
+2019-02-27 00:39:26.307 - pysb.simulator.cupsoda - DEBUG - [models.necro] 19%
+2019-02-27 00:39:26.332 - pysb.simulator.cupsoda - DEBUG - [models.necro] 20%
+2019-02-27 00:39:26.357 - pysb.simulator.cupsoda - DEBUG - [models.necro] 21%
+2019-02-27 00:39:26.381 - pysb.simulator.cupsoda - DEBUG - [models.necro] 22%
+2019-02-27 00:39:26.406 - pysb.simulator.cupsoda - DEBUG - [models.necro] 23%
+2019-02-27 00:39:26.431 - pysb.simulator.cupsoda - DEBUG - [models.necro] 24%
+2019-02-27 00:39:26.456 - pysb.simulator.cupsoda - DEBUG - [models.necro] 25%
+2019-02-27 00:39:26.482 - pysb.simulator.cupsoda - DEBUG - [models.necro] 26%
+2019-02-27 00:39:26.507 - pysb.simulator.cupsoda - DEBUG - [models.necro] 27%
+2019-02-27 00:39:26.532 - pysb.simulator.cupsoda - DEBUG - [models.necro] 28%
+2019-02-27 00:39:26.557 - pysb.simulator.cupsoda - DEBUG - [models.necro] 29%
+2019-02-27 00:39:26.581 - pysb.simulator.cupsoda - DEBUG - [models.necro] 30%
+2019-02-27 00:39:26.606 - pysb.simulator.cupsoda - DEBUG - [models.necro] 31%
+2019-02-27 00:39:26.631 - pysb.simulator.cupsoda - DEBUG - [models.necro] 32%
+2019-02-27 00:39:26.656 - pysb.simulator.cupsoda - DEBUG - [models.necro] 33%
+2019-02-27 00:39:26.680 - pysb.simulator.cupsoda - DEBUG - [models.necro] 34%
+2019-02-27 00:39:26.705 - pysb.simulator.cupsoda - DEBUG - [models.necro] 35%
+2019-02-27 00:39:26.730 - pysb.simulator.cupsoda - DEBUG - [models.necro] 36%
+2019-02-27 00:39:26.755 - pysb.simulator.cupsoda - DEBUG - [models.necro] 37%
+2019-02-27 00:39:26.779 - pysb.simulator.cupsoda - DEBUG - [models.necro] 38%
+2019-02-27 00:39:26.804 - pysb.simulator.cupsoda - DEBUG - [models.necro] 39%
+2019-02-27 00:39:26.829 - pysb.simulator.cupsoda - DEBUG - [models.necro] 40%
+2019-02-27 00:39:26.853 - pysb.simulator.cupsoda - DEBUG - [models.necro] 41%
+2019-02-27 00:39:26.878 - pysb.simulator.cupsoda - DEBUG - [models.necro] 42%
+2019-02-27 00:39:26.903 - pysb.simulator.cupsoda - DEBUG - [models.necro] 43%
+2019-02-27 00:39:26.927 - pysb.simulator.cupsoda - DEBUG - [models.necro] 44%
+2019-02-27 00:39:26.952 - pysb.simulator.cupsoda - DEBUG - [models.necro] 45%
+2019-02-27 00:39:26.977 - pysb.simulator.cupsoda - DEBUG - [models.necro] 46%
+2019-02-27 00:39:27.002 - pysb.simulator.cupsoda - DEBUG - [models.necro] 47%
+2019-02-27 00:39:27.027 - pysb.simulator.cupsoda - DEBUG - [models.necro] 48%
+2019-02-27 00:39:27.052 - pysb.simulator.cupsoda - DEBUG - [models.necro] 49%
+2019-02-27 00:39:27.077 - pysb.simulator.cupsoda - DEBUG - [models.necro] 50%
+2019-02-27 00:39:27.105 - pysb.simulator.cupsoda - DEBUG - [models.necro] 51%
+2019-02-27 00:39:27.129 - pysb.simulator.cupsoda - DEBUG - [models.necro] 52%
+2019-02-27 00:39:27.155 - pysb.simulator.cupsoda - DEBUG - [models.necro] 53%
+2019-02-27 00:39:27.181 - pysb.simulator.cupsoda - DEBUG - [models.necro] 54%
+2019-02-27 00:39:27.206 - pysb.simulator.cupsoda - DEBUG - [models.necro] 55%
+2019-02-27 00:39:27.231 - pysb.simulator.cupsoda - DEBUG - [models.necro] 56%
+2019-02-27 00:39:27.257 - pysb.simulator.cupsoda - DEBUG - [models.necro] 57%
+2019-02-27 00:39:27.283 - pysb.simulator.cupsoda - DEBUG - [models.necro] 58%
+2019-02-27 00:39:27.308 - pysb.simulator.cupsoda - DEBUG - [models.necro] 59%
+2019-02-27 00:39:27.334 - pysb.simulator.cupsoda - DEBUG - [models.necro] 60%
+2019-02-27 00:39:27.359 - pysb.simulator.cupsoda - DEBUG - [models.necro] 61%
+2019-02-27 00:39:27.385 - pysb.simulator.cupsoda - DEBUG - [models.necro] 62%
+2019-02-27 00:39:27.410 - pysb.simulator.cupsoda - DEBUG - [models.necro] 63%
+2019-02-27 00:39:27.436 - pysb.simulator.cupsoda - DEBUG - [models.necro] 64%
+2019-02-27 00:39:27.461 - pysb.simulator.cupsoda - DEBUG - [models.necro] 65%
+2019-02-27 00:39:27.487 - pysb.simulator.cupsoda - DEBUG - [models.necro] 66%
+2019-02-27 00:39:27.512 - pysb.simulator.cupsoda - DEBUG - [models.necro] 67%
+2019-02-27 00:39:27.538 - pysb.simulator.cupsoda - DEBUG - [models.necro] 68%
+2019-02-27 00:39:27.564 - pysb.simulator.cupsoda - DEBUG - [models.necro] 69%
+2019-02-27 00:39:27.590 - pysb.simulator.cupsoda - DEBUG - [models.necro] 70%
+2019-02-27 00:39:27.616 - pysb.simulator.cupsoda - DEBUG - [models.necro] 71%
+2019-02-27 00:39:27.642 - pysb.simulator.cupsoda - DEBUG - [models.necro] 72%
+2019-02-27 00:39:27.667 - pysb.simulator.cupsoda - DEBUG - [models.necro] 73%
+2019-02-27 00:39:27.693 - pysb.simulator.cupsoda - DEBUG - [models.necro] 74%
+2019-02-27 00:39:27.719 - pysb.simulator.cupsoda - DEBUG - [models.necro] 75%
+2019-02-27 00:39:27.744 - pysb.simulator.cupsoda - DEBUG - [models.necro] 76%
+2019-02-27 00:39:27.770 - pysb.simulator.cupsoda - DEBUG - [models.necro] 77%
+2019-02-27 00:39:27.796 - pysb.simulator.cupsoda - DEBUG - [models.necro] 78%
+2019-02-27 00:39:27.821 - pysb.simulator.cupsoda - DEBUG - [models.necro] 79%
+2019-02-27 00:39:27.847 - pysb.simulator.cupsoda - DEBUG - [models.necro] 80%
+2019-02-27 00:39:27.873 - pysb.simulator.cupsoda - DEBUG - [models.necro] 81%
+2019-02-27 00:39:27.898 - pysb.simulator.cupsoda - DEBUG - [models.necro] 82%
+2019-02-27 00:39:27.924 - pysb.simulator.cupsoda - DEBUG - [models.necro] 83%
+2019-02-27 00:39:27.950 - pysb.simulator.cupsoda - DEBUG - [models.necro] 84%
+2019-02-27 00:39:27.975 - pysb.simulator.cupsoda - DEBUG - [models.necro] 85%
+2019-02-27 00:39:28.001 - pysb.simulator.cupsoda - DEBUG - [models.necro] 86%
+2019-02-27 00:39:28.026 - pysb.simulator.cupsoda - DEBUG - [models.necro] 87%
+2019-02-27 00:39:28.052 - pysb.simulator.cupsoda - DEBUG - [models.necro] 88%
+2019-02-27 00:39:28.078 - pysb.simulator.cupsoda - DEBUG - [models.necro] 89%
+2019-02-27 00:39:28.103 - pysb.simulator.cupsoda - DEBUG - [models.necro] 90%
+2019-02-27 00:39:28.129 - pysb.simulator.cupsoda - DEBUG - [models.necro] 91%
+2019-02-27 00:39:28.154 - pysb.simulator.cupsoda - DEBUG - [models.necro] 92%
+2019-02-27 00:39:28.180 - pysb.simulator.cupsoda - DEBUG - [models.necro] 93%
+2019-02-27 00:39:28.205 - pysb.simulator.cupsoda - DEBUG - [models.necro] 94%
+2019-02-27 00:39:28.232 - pysb.simulator.cupsoda - DEBUG - [models.necro] 95%
+2019-02-27 00:39:28.257 - pysb.simulator.cupsoda - DEBUG - [models.necro] 96%
+2019-02-27 00:39:28.283 - pysb.simulator.cupsoda - DEBUG - [models.necro] 97%
+2019-02-27 00:39:28.309 - pysb.simulator.cupsoda - DEBUG - [models.necro] 98%
+2019-02-27 00:39:28.334 - pysb.simulator.cupsoda - DEBUG - [models.necro] 99%
+2019-02-27 00:39:28.360 - pysb.simulator.cupsoda - DEBUG - [models.necro] 100%
+2019-02-27 00:39:28.362 - pysb.simulator.cupsoda - DEBUG - [models.necro] 100%
+2019-02-27 00:39:33.251 - pysb.simulator.cupsoda - INFO - [models.necro] Running cupSODA: /home/ildefog/miniconda3/envs/calibration/bin/cupSODA /tmp/models_necro__dlko9sm/INPUT 1 /tmp/models_necro__dlko9sm/OUTPUT models_necro 0 0 0 1
+2019-02-27 00:39:35.570 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA reported time: 0.001274 seconds
+2019-02-27 00:39:35.570 - pysb.simulator.cupsoda - DEBUG - [models.necro] cupSODA stdout:
+ * Deterministic model detected
+ * Detected 36 species
+ * Detected 37 reactions
+ * Left, right and var matrices loaded
+ * 40131 threads necessary (according to c_matrix)
+ * Will launch 40131 threads on 1 blocks
+ * Kinetic constants for 40131 threads loaded
+ * time_max set to 720.000000
+ * Conversion constant (POST): 0.000000e+00
+0) -1.0 0.0 1.0 2.0 0.0 1.0 -1.0 1.0 1.0 1.0 0.0 1.0 2.0 1.0 1.0 14.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+1) -1.0 0.0 1.0 2.0 0.0 1.0 1.0 2.0 1.0 1.0 14.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+2) -1.0 3.0 1.0 2.0 2.0 14.0 1.0 4.0 1.0 1.0 15.0 1.0 27.0 1.0 1.0 26.0 1.0 32.0 1.0 1.0 29.0 
+3) -1.0 5.0 1.0 2.0 3.0 15.0 1.0 6.0 1.0 1.0 16.0 
+4) -1.0 7.0 1.0 2.0 4.0 16.0 1.0 8.0 1.0 1.0 17.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+5) -1.0 9.0 1.0 2.0 5.0 17.0 1.0 10.0 1.0 1.0 18.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+6) -1.0 34.0 1.0 2.0 6.0 33.0 1.0 35.0 1.0 1.0 34.0 
+7) -1.0 14.0 1.0 2.0 7.0 20.0 1.0 16.0 1.0 1.0 21.0 1.0 17.0 1.0 1.0 21.0 
+8) -1.0 15.0 1.0 2.0 8.0 20.0 1.0 18.0 1.0 1.0 22.0 1.0 19.0 1.0 1.0 22.0 
+9) -1.0 20.0 1.0 2.0 9.0 23.0 1.0 21.0 1.0 1.0 24.0 1.0 27.0 1.0 1.0 26.0 1.0 32.0 1.0 1.0 29.0 
+10) -1.0 23.0 1.0 2.0 10.0 24.0 1.0 26.0 1.0 1.0 26.0 
+11) -1.0 25.0 1.0 2.0 11.0 25.0 1.0 28.0 1.0 1.0 27.0 
+12) -1.0 12.0 1.0 2.0 12.0 19.0 1.0 13.0 1.0 1.0 20.0 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 
+13) -1.0 22.0 1.0 2.0 13.0 24.0 1.0 24.0 1.0 1.0 25.0 1.0 32.0 1.0 1.0 29.0 
+14) 1.0 0.0 1.0 2.0 0.0 1.0 -1.0 2.0 1.0 1.0 14.0 -1.0 3.0 1.0 2.0 2.0 14.0 1.0 4.0 1.0 1.0 15.0 
+15) 1.0 3.0 1.0 2.0 2.0 14.0 -1.0 4.0 1.0 1.0 15.0 -1.0 5.0 1.0 2.0 3.0 15.0 1.0 6.0 1.0 1.0 16.0 
+16) 1.0 5.0 1.0 2.0 3.0 15.0 -1.0 6.0 1.0 1.0 16.0 -1.0 7.0 1.0 2.0 4.0 16.0 1.0 8.0 1.0 1.0 17.0 
+17) 1.0 7.0 1.0 2.0 4.0 16.0 -1.0 8.0 1.0 1.0 17.0 -1.0 9.0 1.0 2.0 5.0 17.0 1.0 10.0 1.0 1.0 18.0 
+18) 1.0 9.0 1.0 2.0 5.0 17.0 -1.0 10.0 1.0 1.0 18.0 -1.0 11.0 1.0 1.0 18.0 
+19) 1.0 11.0 1.0 1.0 18.0 -1.0 12.0 1.0 2.0 12.0 19.0 1.0 13.0 1.0 1.0 20.0 
+20) 1.0 12.0 1.0 2.0 12.0 19.0 -1.0 13.0 1.0 1.0 20.0 -1.0 14.0 1.0 2.0 7.0 20.0 -1.0 15.0 1.0 2.0 8.0 20.0 1.0 16.0 1.0 1.0 21.0 1.0 18.0 1.0 1.0 22.0 
+21) 1.0 14.0 1.0 2.0 7.0 20.0 -1.0 16.0 1.0 1.0 21.0 -1.0 17.0 1.0 1.0 21.0 
+22) 1.0 15.0 1.0 2.0 8.0 20.0 -1.0 18.0 1.0 1.0 22.0 -1.0 19.0 1.0 1.0 22.0 
+23) 1.0 17.0 1.0 1.0 21.0 1.0 19.0 1.0 1.0 22.0 -1.0 20.0 1.0 2.0 9.0 23.0 1.0 21.0 1.0 1.0 24.0 
+24) 1.0 20.0 1.0 2.0 9.0 23.0 -1.0 21.0 1.0 1.0 24.0 -1.0 22.0 1.0 2.0 13.0 24.0 -1.0 23.0 1.0 2.0 10.0 24.0 1.0 24.0 1.0 1.0 25.0 1.0 26.0 1.0 1.0 26.0 
+25) 1.0 22.0 1.0 2.0 13.0 24.0 -1.0 24.0 1.0 1.0 25.0 -1.0 25.0 1.0 2.0 11.0 25.0 1.0 28.0 1.0 1.0 27.0 
+26) 1.0 23.0 1.0 2.0 10.0 24.0 -1.0 26.0 1.0 1.0 26.0 -1.0 27.0 1.0 1.0 26.0 
+27) 1.0 25.0 1.0 2.0 11.0 25.0 -1.0 28.0 1.0 1.0 27.0 -1.0 29.0 1.0 1.0 27.0 1.0 31.0 1.0 1.0 29.0 
+28) 1.0 27.0 1.0 1.0 26.0 -1.0 30.0 1.0 1.0 28.0 
+29) 1.0 29.0 1.0 1.0 27.0 -1.0 31.0 1.0 1.0 29.0 -1.0 32.0 1.0 1.0 29.0 
+30) 1.0 30.0 1.0 1.0 28.0 -1.0 33.0 1.0 1.0 30.0 
+31) 1.0 32.0 1.0 1.0 29.0 
+32) 1.0 32.0 1.0 1.0 29.0 
+33) 1.0 33.0 1.0 1.0 30.0 -1.0 34.0 1.0 2.0 6.0 33.0 1.0 35.0 1.0 1.0 34.0 1.0 36.0 1.0 1.0 34.0 
+34) 1.0 34.0 1.0 2.0 6.0 33.0 -1.0 35.0 1.0 1.0 34.0 -1.0 36.0 1.0 1.0 34.0 
+35) 1.0 36.0 1.0 1.0 34.0 
+ * DUMP ODE
+dX[0]/dt =  -1  * k[0]  * 1.000000  * X[0]  * X[1]  -1  * k[1]  * 1.000000  * X[0] + 1  * k[2]  * 1.000000  * X[14] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[1]/dt =  -1  * k[0]  * 1.000000  * X[0]  * X[1] + 1  * k[2]  * 1.000000  * X[14] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[2]/dt =  -1  * k[3]  * 1.000000  * X[2]  * X[14] + 1  * k[4]  * 1.000000  * X[15] + 1  * k[27]  * 1.000000  * X[26] + 1  * k[32]  * 1.000000  * X[29] 
+dX[3]/dt =  -1  * k[5]  * 1.000000  * X[3]  * X[15] + 1  * k[6]  * 1.000000  * X[16] 
+dX[4]/dt =  -1  * k[7]  * 1.000000  * X[4]  * X[16] + 1  * k[8]  * 1.000000  * X[17] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[5]/dt =  -1  * k[9]  * 1.000000  * X[5]  * X[17] + 1  * k[10]  * 1.000000  * X[18] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[6]/dt =  -1  * k[34]  * 1.000000  * X[6]  * X[33] + 1  * k[35]  * 1.000000  * X[34] 
+dX[7]/dt =  -1  * k[14]  * 1.000000  * X[7]  * X[20] + 1  * k[16]  * 1.000000  * X[21] + 1  * k[17]  * 1.000000  * X[21] 
+dX[8]/dt =  -1  * k[15]  * 1.000000  * X[8]  * X[20] + 1  * k[18]  * 1.000000  * X[22] + 1  * k[19]  * 1.000000  * X[22] 
+dX[9]/dt =  -1  * k[20]  * 1.000000  * X[9]  * X[23] + 1  * k[21]  * 1.000000  * X[24] + 1  * k[27]  * 1.000000  * X[26] + 1  * k[32]  * 1.000000  * X[29] 
+dX[10]/dt =  -1  * k[23]  * 1.000000  * X[10]  * X[24] + 1  * k[26]  * 1.000000  * X[26] 
+dX[11]/dt =  -1  * k[25]  * 1.000000  * X[11]  * X[25] + 1  * k[28]  * 1.000000  * X[27] 
+dX[12]/dt =  -1  * k[12]  * 1.000000  * X[12]  * X[19] + 1  * k[13]  * 1.000000  * X[20] + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22] 
+dX[13]/dt =  -1  * k[22]  * 1.000000  * X[13]  * X[24] + 1  * k[24]  * 1.000000  * X[25] + 1  * k[32]  * 1.000000  * X[29] 
+dX[14]/dt = + 1  * k[0]  * 1.000000  * X[0]  * X[1]  -1  * k[2]  * 1.000000  * X[14]  -1  * k[3]  * 1.000000  * X[2]  * X[14] + 1  * k[4]  * 1.000000  * X[15] 
+dX[15]/dt = + 1  * k[3]  * 1.000000  * X[2]  * X[14]  -1  * k[4]  * 1.000000  * X[15]  -1  * k[5]  * 1.000000  * X[3]  * X[15] + 1  * k[6]  * 1.000000  * X[16] 
+dX[16]/dt = + 1  * k[5]  * 1.000000  * X[3]  * X[15]  -1  * k[6]  * 1.000000  * X[16]  -1  * k[7]  * 1.000000  * X[4]  * X[16] + 1  * k[8]  * 1.000000  * X[17] 
+dX[17]/dt = + 1  * k[7]  * 1.000000  * X[4]  * X[16]  -1  * k[8]  * 1.000000  * X[17]  -1  * k[9]  * 1.000000  * X[5]  * X[17] + 1  * k[10]  * 1.000000  * X[18] 
+dX[18]/dt = + 1  * k[9]  * 1.000000  * X[5]  * X[17]  -1  * k[10]  * 1.000000  * X[18]  -1  * k[11]  * 1.000000  * X[18] 
+dX[19]/dt = + 1  * k[11]  * 1.000000  * X[18]  -1  * k[12]  * 1.000000  * X[12]  * X[19] + 1  * k[13]  * 1.000000  * X[20] 
+dX[20]/dt = + 1  * k[12]  * 1.000000  * X[12]  * X[19]  -1  * k[13]  * 1.000000  * X[20]  -1  * k[14]  * 1.000000  * X[7]  * X[20]  -1  * k[15]  * 1.000000  * X[8]  * X[20] + 1  * k[16]  * 1.000000  * X[21] + 1  * k[18]  * 1.000000  * X[22] 
+dX[21]/dt = + 1  * k[14]  * 1.000000  * X[7]  * X[20]  -1  * k[16]  * 1.000000  * X[21]  -1  * k[17]  * 1.000000  * X[21] 
+dX[22]/dt = + 1  * k[15]  * 1.000000  * X[8]  * X[20]  -1  * k[18]  * 1.000000  * X[22]  -1  * k[19]  * 1.000000  * X[22] 
+dX[23]/dt = + 1  * k[17]  * 1.000000  * X[21] + 1  * k[19]  * 1.000000  * X[22]  -1  * k[20]  * 1.000000  * X[9]  * X[23] + 1  * k[21]  * 1.000000  * X[24] 
+dX[24]/dt = + 1  * k[20]  * 1.000000  * X[9]  * X[23]  -1  * k[21]  * 1.000000  * X[24]  -1  * k[22]  * 1.000000  * X[13]  * X[24]  -1  * k[23]  * 1.000000  * X[10]  * X[24] + 1  * k[24]  * 1.000000  * X[25] + 1  * k[26]  * 1.000000  * X[26] 
+dX[25]/dt = + 1  * k[22]  * 1.000000  * X[13]  * X[24]  -1  * k[24]  * 1.000000  * X[25]  -1  * k[25]  * 1.000000  * X[11]  * X[25] + 1  * k[28]  * 1.000000  * X[27] 
+dX[26]/dt = + 1  * k[23]  * 1.000000  * X[10]  * X[24]  -1  * k[26]  * 1.000000  * X[26]  -1  * k[27]  * 1.000000  * X[26] 
+dX[27]/dt = + 1  * k[25]  * 1.000000  * X[11]  * X[25]  -1  * k[28]  * 1.000000  * X[27]  -1  * k[29]  * 1.000000  * X[27] + 1  * k[31]  * 1.000000  * X[29] 
+dX[28]/dt = + 1  * k[27]  * 1.000000  * X[26]  -1  * k[30]  * 1.000000  * X[28] 
+dX[29]/dt = + 1  * k[29]  * 1.000000  * X[27]  -1  * k[31]  * 1.000000  * X[29]  -1  * k[32]  * 1.000000  * X[29] 
+dX[30]/dt = + 1  * k[30]  * 1.000000  * X[28]  -1  * k[33]  * 1.000000  * X[30] 
+dX[31]/dt = + 1  * k[32]  * 1.000000  * X[29] 
+dX[32]/dt = + 1  * k[32]  * 1.000000  * X[29] 
+dX[33]/dt = + 1  * k[33]  * 1.000000  * X[30]  -1  * k[34]  * 1.000000  * X[6]  * X[33] + 1  * k[35]  * 1.000000  * X[34] + 1  * k[36]  * 1.000000  * X[34] 
+dX[34]/dt = + 1  * k[34]  * 1.000000  * X[6]  * X[33]  -1  * k[35]  * 1.000000  * X[34]  -1  * k[36]  * 1.000000  * X[34] 
+dX[35]/dt = + 1  * k[36]  * 1.000000  * X[34] 
+ * Will sample 1 species
+ * Will store 13 samples 
+ * ATOL vector created
+ * RTOL set to 1.000000e-06
+ * max integration steps set to 20000
+ * All files correct
+ * Fitness calculation: DISABLED 
+Running time: 0.001274 seconds
+
+2019-02-27 00:39:38.970 - pysb.simulator.cupsoda - INFO - [models.necro] cupSODA + I/O time: 5.719218015670776 seconds
+2019-02-27 00:39:38.971 - pysb.simulator.cupsoda - DEBUG - [models.necro] SimulationResult constructor started
+2019-02-27 00:39:43.476 - pysb.simulator.cupsoda - DEBUG - [models.necro] SimulationResult constructor finished

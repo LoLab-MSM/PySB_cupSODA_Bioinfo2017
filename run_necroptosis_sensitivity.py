@@ -66,14 +66,14 @@ def run():
     savename = 'local_necro_parameters_1'
     update_param_vals(model, new_params1)
 
-    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=False, gpu=0, integrator_options=integrator_opt)
+    cupsoda_solver = CupSodaSimulator(model, tspan, verbose=True, gpu=0, integrator_options=integrator_opt)
 
     scipy_solver = ScipyOdeSimulator(model, tspan=tspan, integrator='lsoda',
                                      integrator_options=integrator_opt_scipy)
 
     sens = InitialsSensitivity(
-            # cupsoda_solver,
-            scipy_solver,
+            cupsoda_solver,
+            #scipy_solver,
             values_to_sample=vals,
             observable=observable,
             objective_function=likelihood, sens_type='initials')
