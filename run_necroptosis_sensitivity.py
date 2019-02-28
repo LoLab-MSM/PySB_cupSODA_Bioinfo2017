@@ -11,43 +11,46 @@ import matplotlib
 import os
 matplotlib.use('Agg')
 
+tspan = np.linspace(0, 720, 13)
+observable = 'MLKLa_obs'
+
+
+def normalize(trajectories):
+    """Rescale a matrix of model trajectories to 0-1"""
+    ymin = trajectories.min(0)
+    ymax = trajectories.max(0)
+    return (trajectories - ymin) / (ymax - ymin)
+
+
+# t = np.linspace(0, 720, 13)
+# solver1 = ScipyOdeSimulator(model, tspan=t)
+
+wtx = np.array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12.])
+wty = np.array([0., 0., 0., 0.10, 0.25, 0.5, 0.75, 1., 1., 1., 1., 1., 1.])
+ydata_norm = wty
+
+mtx = np.array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12.])
+mty = np.array([0.00000000e+00, 2.25604804e-07, 8.07101135e-04, 6.20809831e-02,
+                1.06088474e+00, 8.21767829e+00, 3.93069650e+01, 1.36335330e+02,
+                3.76498798e+02, 8.77789805e+02, 1.79557808e+03, 3.30512082e+03,
+                5.54847820e+03])
+ysim_norm = normalize(mty)
+
+
+def likelihood(ysim_norm):
+    # result = solver1.run()
+    #
+    # ysim_array1 = result.observables['MLKLa_obs'][:]
+    #
+    # ysim_norm1 = normalize(ysim_array1)
+
+    mlkl_wt = np.array([0.05, 0.05, 0.05, 0.05, 0.05, 0.2, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05])
+
+    e1 = np.sum((ydata_norm - ysim_norm) ** 2 / (mlkl_wt))
+
+    return e1
+
 def run():
-
-    tspan = np.linspace(0, 720, 13)
-    observable = 'MLKLa_obs'
-
-    def normalize(trajectories):
-        """Rescale a matrix of model trajectories to 0-1"""
-        ymin = trajectories.min(0)
-        ymax = trajectories.max(0)
-        return (trajectories - ymin) / (ymax - ymin)
-
-    # t = np.linspace(0, 720, 13)
-    # solver1 = ScipyOdeSimulator(model, tspan=t)
-
-    wtx = np.array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12.])
-    wty = np.array([0., 0., 0., 0.10, 0.25, 0.5, 0.75, 1., 1., 1., 1., 1., 1.])
-    ydata_norm = wty
-
-    mtx = np.array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12.])
-    mty = np.array([0.00000000e+00, 2.25604804e-07, 8.07101135e-04, 6.20809831e-02,
-                    1.06088474e+00, 8.21767829e+00, 3.93069650e+01, 1.36335330e+02,
-                    3.76498798e+02, 8.77789805e+02, 1.79557808e+03, 3.30512082e+03,
-                    5.54847820e+03])
-    ysim_norm = normalize(mty)
-
-    def likelihood(ysim_norm):
-        # result = solver1.run()
-        #
-        # ysim_array1 = result.observables['MLKLa_obs'][:]
-        #
-        # ysim_norm1 = normalize(ysim_array1)
-
-        mlkl_wt = np.array([0.05, 0.05, 0.05, 0.05, 0.05, 0.2, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05])
-
-        e1 = np.sum((ydata_norm - ysim_norm) ** 2 / (mlkl_wt))
-
-        return e1
 
     # values to sample over
     vals = np.linspace(.8, 1.2, 21)
